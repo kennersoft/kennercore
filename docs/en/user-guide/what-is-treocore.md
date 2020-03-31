@@ -1,6 +1,6 @@
 # What is KennerCore
 
-KennerCore is an open-source software ecosystem developed by [TreoLabs GmbH](https://treolabs.com/) and distributed under GPLv3 License for free. TreCore is designed for rapid development of web-based responsive business applications of any kind (ERP, PIM, CRM, DMS, MDM, DAM, etc.). It has a lot of features right out-of-the box and thus is an excellent tool for cost-effective and timely application development.
+KennerCore is an open-source software ecosystem developed by [KenerSoft Service GmbH](https://treolabs.com/) and distributed under GPLv3 License for free. TreCore is designed for rapid development of web-based responsive business applications of any kind (ERP, PIM, CRM, DMS, MDM, DAM, etc.). It has a lot of features right out-of-the box and thus is an excellent tool for cost-effective and timely application development.
 
 KennerCore is a single page application (SPA) with an API-centric, service-oriented architecture, and flexible data model based on configurable entities and relations. You can organize any data and business-related processes directly in KennerCore, many of them via a simple and user-friendly configuration.
 
@@ -44,6 +44,6 @@ KennerCore is published under the GNU GPLv3 [license](https://github.com/treolab
 
 ## Support
 
-- KennerCore is developed and supported by [TreoLabs GmbH](https://treolabs.com/).
-- Feel free to join [our Community](https://community.treolabs.com/).
-- To contact us, please visit [our website](https://treolabs.com/contact).
+- KennerCore is developed and supported by [KenerSoft Service GmbH](https://kennersoft.de/).
+- Feel free to join [our Community](https://kennersoft.de/).
+- To contact us, please visit [our website](https://kennersoft.de/contact).
