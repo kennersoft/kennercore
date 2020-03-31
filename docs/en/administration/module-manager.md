@@ -1,6 +1,6 @@
 ## Modules Manager
 
-The Modules Manager mechanism is available for you in TreoCore to install, update, and remove modules – extensions that add new or expand the existing functionality.
+The Modules Manager mechanism is available for you in KennerCore to install, update, and remove modules – extensions that add new or expand the existing functionality.
 
 Modules Manager is located on the Administration > Modules Manager page.
 
@@ -8,11 +8,11 @@ Modules Manager is located on the Administration > Modules Manager page.
 
 As you can see, the Modules Manager insterface consists of three panels:
 
-* **Installed** – a list of modules installed in the system is displayed here along with the following data given in the corresponding columns: module name and description, setting version (* means the latest version), current version of TreoCore and required dependencies.
+* **Installed** – a list of modules installed in the system is displayed here along with the following data given in the corresponding columns: module name and description, setting version (* means the latest version), current version of KennerCore and required dependencies.
 
   ![installed_panel](../../_assets/module-manader/module_manager_installed_en.png)
   
-* **Store** – a list of all modules supported by TreoCore is displayed here along with the description, tags, and status of each module. Tags identify modules by their main features to simplify your search for this or that module. For example: possibility to export or restore data, manage prices, etc. Management options are given in the "Status" column for each module separately. See the details in the [Module Buying](#module-buying) section.   
+* **Store** – a list of all modules supported by KennerCore is displayed here along with the description, tags, and status of each module. Tags identify modules by their main features to simplify your search for this or that module. For example: possibility to export or restore data, manage prices, etc. Management options are given in the "Status" column for each module separately. See the details in the [Module Buying](#module-buying) section.   
 
   ![store_panel](../../_assets/module-manader/module_manager_store_en.png)
 
@@ -28,7 +28,7 @@ As you can see, the Modules Manager insterface consists of three panels:
 
 For a start, visit our store for details: [English version](https://treopim.com/store), [German version](https://treopim.com/de/shop).
 
-In TreoCore the following status options are available for each module:
+In KennerCore the following status options are available for each module:
 
 * **available** – available for installation;
 * **buyable** – there is no access to module.
@@ -55,7 +55,7 @@ To install a module:
 
    ![choosing_version](../../_assets/module-manader/module_manager_versions_en.png)
    
-   Having clicked "Install", TreoCore generates a schema with chosen module(s) and their dependencies for further installation.
+   Having clicked "Install", KennerCore generates a schema with chosen module(s) and their dependencies for further installation.
 
 5. To start the module(s) installation process, click "Run Update" and confirm the action: 
    

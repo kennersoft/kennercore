@@ -10,6 +10,10 @@
  * Copyright (C) 2017-2019 TreoLabs GmbH
  * Website: https://treolabs.com
  *
+ * KennerCore is TreoCore-based Open Source application.
+ * Copyright (C) 2020 KenerSoft Service GmbH
+ * Website: https://kennersoft.de
+ *
  * TreoCore as well as EspoCRM is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
@@ -17,7 +21,7 @@
  *
  * TreoCore as well as EspoCRM is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License

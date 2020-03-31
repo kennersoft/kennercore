@@ -1,10 +1,10 @@
 # Stream
 
-Stream is a separate TreoCore [entity](./what-is-treocore.md#concept-of-entity), which is used to display the entries of the [user activity](#user-activity-stream) and [entity records](#entity-records-stream).
+Stream is a separate KennerCore [entity](./what-is-treocore.md#concept-of-entity), which is used to display the entries of the [user activity](#user-activity-stream) and [entity records](#entity-records-stream).
 
 > The stream display is enabled/disabled by the administrator for each entity separately, so if this feature is missing on any entity [detail view](./views-and-panels-core.md#detail-view) page, please, contact your administrator.
 
-TreoCore supports the following **types** of stream entries:
+KennerCore supports the following **types** of stream entries:
 - **Posts** – messages assigned to the current user by other system users, as well as his own messages posted in the stream, irregardless of the assignee.
 - **Updates** – notifications about changes in the [audited](./what-is-treocore-core.md#concept-of-data-auditing) fields of the user-related entries. *Please, note that entity fields are made audited only by the administrator.*
 - **All** – general changes in the user- or entity-related actions.

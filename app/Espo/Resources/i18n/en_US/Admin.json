@@ -194,7 +194,7 @@
         "emailTemplates": "Templates for outbound emails",
         "import": "Data import (CSV)",
         "layoutManager": "Layouts customization (list, detail, edit, search, mass update, etc.)",
-        "entityManager": "TreoCore entity creation, editing and removing as well as management of the entity fields and relations",
+        "entityManager": "KennerCore entity creation, editing and removing as well as management of the entity fields and relations",
         "userInterface": "UI configuration",
         "authTokens": "Active authorization sessions, including IP address and last access date",
         "authentication": "Authentication settings",

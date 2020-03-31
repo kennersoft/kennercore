@@ -1,7 +1,7 @@
 {
   "entity": true,
   "type": "Base",
-  "module": "TreoCore",
+  "module": "KennerCore",
   "object": true,
   "quickCreateListDisabled": true
 }

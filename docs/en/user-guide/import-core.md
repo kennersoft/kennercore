@@ -1,6 +1,6 @@
 # Import
 
-Data import is a separate TreoCore system [entity](./what-is-treocore.md#concept-of-entity) that comes out of the box. It allows you to import the data from CSV files. 
+Data import is a separate KennerCore system [entity](./what-is-treocore.md#concept-of-entity) that comes out of the box. It allows you to import the data from CSV files. 
 
 `Import` can be added to the [navigation menu](./user-interface-core.md#navigation-menu) on the user preferences page via activating the `Custom tab list` option and adding the corresponding tab.
 
@@ -12,7 +12,7 @@ To configure an import operation, click `Import` in the navigation menu – the 
 
 ![Import page](../../_assets/import/import-page.jpg)
 
-On the `WHAT TO IMPORT?` panel, select the desired entity type and action to be performed using the corresponding drop-down lists. The following import actions are available in TreoCore:
+On the `WHAT TO IMPORT?` panel, select the desired entity type and action to be performed using the corresponding drop-down lists. The following import actions are available in KennerCore:
 
 - **Create Only** – new data records will be created;
 - **Update Only** – data in the already existing records will be updated;
