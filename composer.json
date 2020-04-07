@@ -1,7 +1,7 @@
 {
-  "name": "treolabs/treocore",
-  "description": "TreoCORE. Open source application.",
-  "homepage": "https://treolabs.com",
+  "name": "kennersoft/kennercore",
+  "description": "KennerCORE. Open source application.",
+  "homepage": "https://kenersoft.de",
   "license": "GPL-3.0-only",
   "minimum-stability": "stable",
   "require": {
