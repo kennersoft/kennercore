@@ -4,7 +4,7 @@
     "tab": true,
     "acl": true,
     "aclPortal": "recordAllAccountNo",
-    "module": "KennerCore",
+    "module": "TreoCore",
     "customizable": true,
     "stream": true,
     "importable": true,

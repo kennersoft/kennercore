@@ -139,7 +139,7 @@ class ServiceFactory
             $module = $this->container->get('metadata')->get(['scopes', $name, 'module'], 'Espo');
 
             // prepare module name for Treo services
-            if ($module == 'KennerCore') {
+            if ($module == 'TreoCore') {
                 $module = 'Treo';
             }
 

@@ -259,7 +259,7 @@ class Composer extends AbstractService
             'total' => 1,
             'list'  => [
                 [
-                    'id'             => 'KennerCore',
+                    'id'             => 'TreoCore',
                     'name'           => $this->translate('Core'),
                     'description'    => $this->translate('Core', 'descriptions'),
                     'settingVersion' => self::getComposerJson()['require']['treolabs/treocore'],

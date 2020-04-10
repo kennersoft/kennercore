@@ -146,7 +146,7 @@ class Metadata extends Base
         $moduleName = $this->getScopeModuleName($scopeName);
 
         // set treo name
-        if ($moduleName == 'KennerCore') {
+        if ($moduleName == 'TreoCore') {
             $moduleName = 'Treo';
         }
 

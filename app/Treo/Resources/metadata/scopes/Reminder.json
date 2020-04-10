@@ -3,7 +3,7 @@
     "layouts": false,
     "tab": false,
     "acl": false,
-    "module": "KennerCore",
+    "module": "TreoCore",
     "customizable": false,
     "importable": false
 }
