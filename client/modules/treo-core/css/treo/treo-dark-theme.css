@@ -21083,4 +21083,12 @@ select {
         height: auto;
         min-height: calc(100% - 28px);
     }
+
+    #navbar > div > div.navbar-header > a > img {
+        padding: 5px 5px 5px 0;
+    }
+
+    #main .catalog-tree-panel-hidden > button.collapse-panel {
+        z-index: auto;
+    }
 }
