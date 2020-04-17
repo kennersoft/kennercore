@@ -1,7 +1,7 @@
 {
   "name": "kennersoft/kennercore",
   "description": "KennerCORE. Open source application.",
-  "homepage": "https://kenersoft.de",
+  "homepage": "https://kennersoft.de",
   "license": "GPL-3.0-only",
   "minimum-stability": "stable",
   "require": {
