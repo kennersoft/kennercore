@@ -67,7 +67,7 @@ Here is a KennerCore package description in detail:
 
 ### What Technologies Is It Based On?
 
-KennerCore was created based on EspoCRM. It uses:
+KennerCore was created based on TreoCore. It uses:
 
 * PHP7 – pure PHP, without any frameworks to achieve the best possible performance,
 * backbone.js – framework for SPA Frontend,
