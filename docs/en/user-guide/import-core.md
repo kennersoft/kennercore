@@ -1,10 +1,10 @@
 # Import
 
-Data import is a separate KennerCore system [entity](./what-is-treocore.md#concept-of-entity) that comes out of the box. It allows you to import the data from CSV files. 
+Data import is a separate KennerCore system [entity](./what-is-kennercore.md#concept-of-entity) that comes out of the box. It allows you to import the data from CSV files. 
 
 `Import` can be added to the [navigation menu](./user-interface-core.md#navigation-menu) on the user preferences page via activating the `Custom tab list` option and adding the corresponding tab.
 
-> To have more advanced import options (e.g. import product attribute values, product images/assets, product categories, etc.), get the **"Import Feeds" module**. The details are available in the [TreoPIM store](https://treopim.com/store/import-feeds).
+> To have more advanced import options (e.g. import product attribute values, product images/assets, product categories, etc.), get the **"Import Feeds" module**. The details are available in the [KennerPim store](https://treopim.com/store/import-feeds).
 
 ## Setup
 

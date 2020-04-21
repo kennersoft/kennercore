@@ -38,7 +38,7 @@ Taskbar is a top panel of the KennerCore user interface:
 
 ![Taskbar](../../_assets/user-interface/taskbar.jpg)
 
-A taskbar consists of a [global search](#global-search) field and some functional icons that help you work and collaborate within the TreoPIM system, namely:
+A taskbar consists of a [global search](#global-search) field and some functional icons that help you work and collaborate within the KennerPim system, namely:
 - [Desktop notifications](#desktop-notifications); 
 - [Queue Manager](#queue-manager);
 - [Quick create](#quick-create);

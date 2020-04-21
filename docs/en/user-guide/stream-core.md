@@ -1,6 +1,6 @@
 # Stream
 
-Stream is a separate KennerCore [entity](./what-is-treocore.md#concept-of-entity), which is used to display the entries of the [user activity](#user-activity-stream) and [entity records](#entity-records-stream).
+Stream is a separate KennerCore [entity](./what-is-kennercore.md#concept-of-entity), which is used to display the entries of the [user activity](#user-activity-stream) and [entity records](#entity-records-stream).
 
 > The stream display is enabled/disabled by the administrator for each entity separately, so if this feature is missing on any entity [detail view](./views-and-panels-core.md#detail-view) page, please, contact your administrator.
 

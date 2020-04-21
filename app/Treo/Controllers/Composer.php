@@ -118,7 +118,7 @@ class Composer extends Base
      *               'id': 'Revisions',
      *               'name': 'Revisions',
      *               'version': '1.0.0',
-     *               'description': 'Module Revisions for TreoPIM.',
+     *               'description': 'Module Revisions for KennerPim.',
      *               'required': [],
      *               'isActive': true
      *           }

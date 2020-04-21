@@ -39,7 +39,7 @@ Espo.define('treo-core:views/site/header', 'class-replace!treo-core:views/site/h
 
     return Dep.extend({
 
-        title: 'TreoCRM',
+        title: 'KennerCrm',
 
         setup: function () {
             this.navbarView = this.getMetadata().get('app.clientDefs.navbarView') || this.navbarView;

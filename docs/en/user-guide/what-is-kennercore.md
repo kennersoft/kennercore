@@ -18,8 +18,8 @@ KennerCore is the best fit **for businesses**, who want to:
 
 The following add-on applications are available on the KennerCore basis:
 
-- [TreoPIM](./what-is-treopim.md)
-- TreoCRM
+- [KennerPim](./what-is-kennerpim.md)
+- KennerCrm
 - TreoDAM
 
 All three applications can be used in a single instance as well as extended with numerous modules. Please, see the details on the modules available for you in our [store](https://treopim.com/store).
@@ -40,7 +40,7 @@ Please, note that the concept of data auditing is the foundation of the **"Revis
 
 ## License
 
-KennerCore is published under the GNU GPLv3 [license](https://github.com/treolabs/treocore/blob/master/LICENSE.txt).
+KennerCore is published under the GNU GPLv3 [license](https://github.com/kennersoft/kennercore/blob/master/LICENSE.txt).
 
 ## Support
 

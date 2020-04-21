@@ -17,8 +17,8 @@ KennerCore is the best fit **for businesses**, who want to:
 ### What Are KennerCore Add-Ons?
 
 The following add-on applications are available on the KennerCore basis:
-* TreoPIM
-* TreoCRM
+* KennerPim
+* KennerCrm
 * TreoDAM
 
 Each application may be used as a single instance and/or may be extended with numerous modules.

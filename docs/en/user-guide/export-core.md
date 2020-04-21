@@ -2,7 +2,7 @@
 
 The data exporting feature comes with the KennerCore system out of the box and is available on any entity [list view](./views-and-panels-core.md#list-view) page. It allows you to export the desired data fields in the XLSX (Excel) or CSV format.
 
-> To have more advanced export options (e.g. export product attribute values, product images/assets, channels, etc.), get the **"Export Feeds" module**. The details are available in the [TreoPIM store](https://treopim.com/store/export-feeds).
+> To have more advanced export options (e.g. export product attribute values, product images/assets, channels, etc.), get the **"Export Feeds" module**. The details are available in the [KennerPim store](https://treopim.com/store/export-feeds).
 
 ## Setup
 

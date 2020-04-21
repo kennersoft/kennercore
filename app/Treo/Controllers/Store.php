@@ -61,7 +61,7 @@ class Store extends \Espo\Core\Controllers\Base
      *               'id': 'Revisions',
      *               'name': 'Revisions',
      *               'version': '1.0.0',
-     *               'description': 'Module Revisions for TreoPIM.',
+     *               'description': 'Module Revisions for KennerPim.',
      *               'status': 'available'
      *           }
      *       ]
