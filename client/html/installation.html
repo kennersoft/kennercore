@@ -2,6 +2,7 @@
 <html>
     <head>
         <title>{{applicationName}}</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="{{basePath}}client/modules/treo-core/css/treo/treo-dark-theme.css">
         <link rel="shortcut icon" sizes="196x196" href="{{basePath}}client/modules/treo-core/img/favicon16x16.png">
         <link rel="icon" href="{{basePath}}client/modules/treo-core/img/favicon16x16.png" type="image/x-icon">
@@ -69,6 +70,54 @@
             @keyframes spin {
                 0% { transform: rotate(0deg); }
                 100% { transform: rotate(360deg); }
+            }
+
+            @media screen and (max-width: 767px) {
+                body, html {
+                    height: 100%;
+                }
+
+                .msg-box {
+                    z-index: 1000;
+                }
+
+                td {
+                    padding: 5px !important;
+                }
+
+                .content.container {
+                    min-height: calc(100% - 28px);
+                    padding: 0 0;
+                }
+
+                #general-container {
+                    border: 0;
+                }
+
+                #general-container,
+                .panel-body,
+                #main-template {
+                    height: 100%;
+                }
+
+                #general-container .main-template,
+                #general-container .main-template .modal-body {
+                    min-height: unset;
+                }
+
+                #navbar > .navbar {
+                    margin-bottom: 0px;
+                }
+            }
+
+            @media screen and (max-width: 320px) {
+                td {
+                    padding: 1px !important;
+                }
+
+                .modal-body {
+                    padding: 12px;
+                }
             }
         </style>
     </head>
