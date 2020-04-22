@@ -21124,4 +21124,12 @@ select {
     .overview.col-md-8 .panel-body.panel-body-form {
         padding: 5px 0px;
     }
+
+    .side > .panel.panel-default.panel-default {
+        margin: 0px -15px;
+    }
+
+    .side > .panel.panel-default.panel-default .panel-heading {
+        margin: 0;
+    }
 }
