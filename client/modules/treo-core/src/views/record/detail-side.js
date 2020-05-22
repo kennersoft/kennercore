@@ -151,7 +151,11 @@ Espo.define('treo-core:views/record/detail-side', 'class-replace!treo-core:views
                     || (scopeDefs.hasTeam && fieldDefs.name === 'teams');
             });
 
-            let hasAnyField = (this.defaultPanelDefs.options.fieldList || []).some(fieldDefs => this.model.hasLink(fieldDefs.name));
+            let hasAnyField = (this.defaultPanelDefs.options.fieldList || []).some(fieldDefs => {
+                const name = fieldDefs.name.indexOf(':') === 0 ? fieldDefs.name.slice(1) : fieldDefs.name;
+                return this.model.hasLink(name);
+            });
+
             if (this.mode === 'detail' || hasAnyField) {
                 Dep.prototype.setupDefaultPanel.call(this);
             }
