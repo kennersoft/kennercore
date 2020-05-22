@@ -456,8 +456,12 @@ Espo.define('treo-core:views/record/list', 'class-replace!treo-core:views/record
                 setWidth();
                 toggleClass();
 
-                $window.on('scroll', toggleClass);
-                $window.on('resize', function () {
+                $window.on('scroll', () => {
+                    setWidth();
+                    toggleClass();
+                });
+
+                $window.on('resize', () => {
                     setPosition();
                     setWidth();
                 });
@@ -473,9 +477,10 @@ Espo.define('treo-core:views/record/list', 'class-replace!treo-core:views/record
                 if (target && menu) {
                     let menuHeight = menu.height();
                     let pageHeight = $(document).height();
+                    let footerHeight = $('footer').outerHeight();
                     let positionTop = $(target).offset().top + $(target).outerHeight(true);
 
-                    if ((positionTop + menuHeight) > pageHeight) {
+                    if ((positionTop + menuHeight + footerHeight) > pageHeight) {
                         menu.css({
                             'top': `-${menuHeight}px`
                         });
