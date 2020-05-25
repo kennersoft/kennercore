@@ -1,6 +1,6 @@
 ## What Is KennerCore?
 
-KennerCore is an open-source software ecosystem developed by KennerSoft Service GmbH and distributed under GPLv3 License for free. KennerCore is designed for rapid development of web-based responsive business applications of any kind (ERP, PIM, CRM, DMS, MDM, DAM, etc.). It is an excellent tool for cost-effective and timely application development that comes with the powerful out-of-the-box functionality.
+KennerCore is an open-source software ecosystem developed by Kenner Soft Service GmbH and distributed under GPLv3 License for free. KennerCore is designed for rapid development of web-based responsive business applications of any kind (ERP, PIM, CRM, DMS, MDM, DAM, etc.). It is an excellent tool for cost-effective and timely application development that comes with the powerful out-of-the-box functionality.
 
 KennerCore is a single page application (SPA) with an API-centric, service-oriented architecture, and flexible data model based on configurable entities and relations. You can organize any data and business-related processes directly in KennerCore, many of them via a simple and user-friendly configuration.
 
@@ -87,8 +87,8 @@ KennerCore has a REST API and can be integrated with any third-party system. You
 
 ### Requirements
 
-* Unix-based system. Linux Mint is recommended.
-* PHP 7.1 or above (with pdo_mysql, openssl, json, zip, gd, mbstring, xml, curl,exif extensions).
+* Unix-based system.
+* PHP 7.1 or above (with pdo_mysql, openssl, json, zip, gd, mbstring, xml, curl, exif, mailparse extensions).
 * MySQL 5.5.3 or above.
 
 ### Configuration Instructions Based on Your Server
@@ -104,7 +104,7 @@ To create your new KennerCore application, first make sure you're using PHP 7.1 
 
 1. Create your new project by running:
    ```
-   composer create-project treolabs/skeleton my-kennercore-project
+   composer create-project kennersoft/skeleton my-kennercore-project
    ```
    > **my-kennercore-project** – project name
    
@@ -132,6 +132,6 @@ KennerCore is published under the GNU GPLv3 [license](LICENSE.txt).
 
 ### Support
 
-- KennerCore is developed and supported by [KennerSoft Service GmbH](https://kennersoft.de/).
+- KennerCore is developed and supported by [Kenner Soft Service GmbH](https://kennersoft.de/).
 - Feel free to join [our Community](https://kennersoft.de/).
 - To contact us, please visit [our Website](https://kennersoft.de/).
