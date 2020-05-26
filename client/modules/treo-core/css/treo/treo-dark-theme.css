@@ -21035,3 +21035,23 @@ select {
 #header #navbar .navbar.navbar-inverse.logo-centr-outer .logo-centr-inner .navbar-header a.navbar-brand.nav-link.logo img {
     margin: 13px auto !important;
 }
+
+.list-group-item.ui-sortable-helper {
+    background-color: white;
+}
+
+#layout .cell .left {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    float: left;
+}
+
+#layout .cell .right {
+    float: right;
+}
+
+#layout .cell .right .fa-minus, #layout .cell .right .fa-times {
+    position: relative;
+    top: 1px;
+}
