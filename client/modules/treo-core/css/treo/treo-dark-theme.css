@@ -15647,16 +15647,19 @@ select[multiple].input-sm {
     padding-right: 14px
 }
 
-#main > .list-container > .list {
+#main > .list-container > .list,
+#main > div > .list-container > .list {
     margin-left: -15px;
     margin-right: -15px
 }
 
-#main > .list-container > .list > table td:first-child, #main > .list-container > .list > table th:first-child {
+#main > .list-container > .list > table td:first-child, #main > .list-container > .list > table th:first-child,
+#main > div > .list-container > .list > table td:first-child, #main > div > .list-container > .list > table th:first-child {
     padding-left: 15px
 }
 
-#main > .list-container > .list > table td:last-child, #main > .list-container > .list > table th:last-child {
+#main > .list-container > .list > table td:last-child, #main > .list-container > .list > table th:last-child,
+#main > div > .list-container > .list > table td:last-child, #main > div > .list-container > .list > table th:last-child {
     padding-right: 15px
 }
 
@@ -17262,7 +17265,7 @@ a.field-info > span.fa-info-circle {
 }
 
 .panel-heading > .btn-group {
-    top: -5px;
+    top: -4px;
     right: -10px
 }
 
@@ -18881,7 +18884,7 @@ input#sn-checkbox-open-in-new-window {
 }
 
 .panel-default > .panel-heading {
-    padding: 5px 10px 6px;
+    padding: 4px 10px 6px;
     color: rgba(0, 0, 0, 0.87);
     background-color: #ececec;
     border-top: 1px solid #dcdcdc;
@@ -18898,7 +18901,8 @@ input#sn-checkbox-open-in-new-window {
 }
 
 .panel-info > .panel-heading {
-    padding: 5px 10px 6px;
+    padding: 4px 10px 6px;
+    border-top: 1px solid transparent;
 }
 
 .side .panel-default > .panel-heading {
@@ -19357,7 +19361,6 @@ ul.dropdown-menu > li.checkbox {
     border-right: 1px solid #dcdcdc;
     margin: -6px 14px -10px -15px;
     padding: 0 15px 0 25px;
-    float: left;
     min-height: 35px;
 }
 
@@ -19732,6 +19735,7 @@ button.category:focus {
     .modal-dialog .edit > .row > .overview.col-sm-12,
     .modal-dialog .detail > .row > .overview.col-sm-12  {
         min-height: unset;
+        border: unset;
     }
 
     #main .edit > .row,
@@ -19745,6 +19749,11 @@ button.category:focus {
         padding: 0;
         position: relative;
         border-top: 1px solid #dcdcdc;
+    }
+
+    .modal-dialog .edit > .row > .side,
+    .modal-dialog .detail > .row > .side  {
+        border: unset;
     }
 
     .nav > li > a {
