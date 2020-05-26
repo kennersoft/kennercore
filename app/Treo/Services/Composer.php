@@ -117,7 +117,7 @@ class Composer extends AbstractService
             $data = json_decode(file_get_contents(self::$composerLock), true);
             if (!empty($data['packages'])) {
                 foreach ($data['packages'] as $package) {
-                    if ($package['name'] == 'treolabs/treocore') {
+                    if ($package['name'] == 'kennersoft/kennercore') {
                         return $package['version'];
                     }
                 }
@@ -262,7 +262,7 @@ class Composer extends AbstractService
                     'id'             => 'TreoCore',
                     'name'           => $this->translate('Core'),
                     'description'    => $this->translate('Core', 'descriptions'),
-                    'settingVersion' => self::getComposerJson()['require']['treolabs/treocore'],
+                    'settingVersion' => self::getComposerJson()['require']['kennersoft/kennercore'],
                     'currentVersion' => self::getCoreVersion(),
                     'versions'       => [],
                     'isSystem'       => true,
