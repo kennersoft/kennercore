@@ -88,7 +88,7 @@ class Installer extends AbstractListener
         $data = json_decode(file_get_contents(Composer::$composer), true);
         $data['repositories'][] = [
             'type' => 'composer',
-            'url'  => 'https://packagist.treopim.com/packages.json?id=' . $treoId
+            'url'  => 'https://packagist.kennersoft.de/packages.json?id=' . $treoId
         ];
 
         // create repositories file
