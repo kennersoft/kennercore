@@ -2540,10 +2540,13 @@ class Record extends \Espo\Core\Services\Base
         $item = $this->getMetadata()
             ->get("clientDefs.{$entity->getEntityName()}.dynamicLogic.fields.$field.$typeResult.conditionGroup", []);
 
-        if (empty($item) && !empty($relation = $entity->getFields()[$field]['relation']) && empty($this->relationFields['usedRelation'][$relation])) {
-            $this->relationFields['usedRelation'][$relation] = $relation;
-            $item = $this->getMetadata()
-                ->get("clientDefs.{$entity->getEntityName()}.dynamicLogic.fields.$relation.$typeResult.conditionGroup", []);
+        if (isset($entity->getFields()[$field]['relation'])) {
+            if (empty($item) && !empty($relation = $entity->getFields()[$field]['relation']) && empty($this->relationFields['usedRelation'][$relation])) {
+                $this->relationFields['usedRelation'][$relation] = $relation;
+                $item = $this->getMetadata()
+                    ->get("clientDefs.{$entity->getEntityName()}.dynamicLogic.fields.$relation.$typeResult.conditionGroup",
+                        []);
+            }
         }
 
         if (!empty($item)) {
@@ -2573,8 +2576,8 @@ class Record extends \Espo\Core\Services\Base
     private function isNullField(Entity $entity, $field): bool
     {
         $isNull = is_null($entity->get($field));
-        if ($isNull && !empty($relation = $entity->getFields()[$field]['relation'])) {
-            $relationValue = $entity->get($relation);
+        if ($isNull && !empty($entity->getFields()[$field]['relation'])) {
+            $relationValue = $entity->get($entity->getFields()[$field]['relation']);
             if ($relationValue instanceof \Espo\ORM\EntityCollection) {
                 $isNull = $relationValue->count() === 0;
             } else {
