@@ -15648,18 +15648,18 @@ select[multiple].input-sm {
 }
 
 #main > .list-container > .list,
-#main > div > .list-container > .list {
+#main > .product-list-container > .list-container > .list {
     margin-left: -15px;
     margin-right: -15px
 }
 
 #main > .list-container > .list > table td:first-child, #main > .list-container > .list > table th:first-child,
-#main > div > .list-container > .list > table td:first-child, #main > div > .list-container > .list > table th:first-child {
+#main > .product-list-container > .list-container > .list > table td:first-child, #main > .product-list-container > .list-container > .list > table th:first-child {
     padding-left: 15px
 }
 
 #main > .list-container > .list > table td:last-child, #main > .list-container > .list > table th:last-child,
-#main > div > .list-container > .list > table td:last-child, #main > div > .list-container > .list > table th:last-child {
+#main > .product-list-container > .list-container > .list > table td:last-child, #main > .product-list-container > .list-container > .list > table th:last-child {
     padding-right: 15px
 }
 
@@ -19809,6 +19809,10 @@ button.category:focus {
 
 }
 @media screen and (min-width: 1200px) {
+    #main .product-list-container {
+        display: flex;
+    }
+
     #main .detail .catalog-tree-panel.catalog-tree-panel-hidden + .overview {
         width: calc(75% - 25px);
     }
