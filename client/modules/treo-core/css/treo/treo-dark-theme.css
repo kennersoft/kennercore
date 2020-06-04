@@ -15648,18 +15648,18 @@ select[multiple].input-sm {
 }
 
 #main > .list-container > .list,
-#main > div > .list-container > .list {
+#main > .product-list-container > .list-container > .list {
     margin-left: -15px;
     margin-right: -15px
 }
 
 #main > .list-container > .list > table td:first-child, #main > .list-container > .list > table th:first-child,
-#main > div > .list-container > .list > table td:first-child, #main > div > .list-container > .list > table th:first-child {
+#main > .product-list-container > .list-container > .list > table td:first-child, #main > .product-list-container > .list-container > .list > table th:first-child {
     padding-left: 15px
 }
 
 #main > .list-container > .list > table td:last-child, #main > .list-container > .list > table th:last-child,
-#main > div > .list-container > .list > table td:last-child, #main > div > .list-container > .list > table th:last-child {
+#main > .product-list-container > .list-container > .list > table td:last-child, #main > .product-list-container > .list-container > .list > table th:last-child {
     padding-right: 15px
 }
 
@@ -19359,7 +19359,7 @@ ul.dropdown-menu > li.checkbox {
     position: relative;
     border-top: 1px solid #dcdcdc;
     border-right: 1px solid #dcdcdc;
-    margin: -6px 14px -10px -15px;
+    margin: -6px 14px 0 -15px;
     padding: 0 15px 0 25px;
     min-height: 35px;
     background-color: #fff;
@@ -19377,10 +19377,6 @@ ul.dropdown-menu > li.checkbox {
 
 #main .catalog-tree-panel + .list-container .list {
     border-left: 1px solid #e8eced;
-}
-
-#main .catalog-tree-panel.catalog-tree-panel-hidden + .list-container {
-    margin-left: 25px;
 }
 
 #main .catalog-tree-panel + .list-buttons-container::before,
@@ -19511,6 +19507,7 @@ button.category:focus {
         margin: 0 0 10px 0;
         float: none;
         min-height: 53px;
+        z-index: 1;
     }
 
     #main .catalog-tree-panel > .category-panel > .no-data {
@@ -19809,6 +19806,10 @@ button.category:focus {
 
 }
 @media screen and (min-width: 1200px) {
+    #main .product-list-container {
+        display: flex;
+    }
+
     #main .detail .catalog-tree-panel.catalog-tree-panel-hidden + .overview {
         width: calc(75% - 25px);
     }
