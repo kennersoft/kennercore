@@ -19363,7 +19363,7 @@ ul.dropdown-menu > li.checkbox {
     padding: 0 15px 0 25px;
     min-height: 35px;
     background-color: #fff;
-    z-index: 5;
+    z-index: 2;
 }
 
 #main .detail .catalog-tree-panel {
@@ -19507,7 +19507,6 @@ button.category:focus {
         margin: 0 0 10px 0;
         float: none;
         min-height: 53px;
-        z-index: 1;
     }
 
     #main .catalog-tree-panel > .category-panel > .no-data {
@@ -19810,8 +19809,8 @@ button.category:focus {
         display: flex;
     }
 
-    #main .detail .catalog-tree-panel.catalog-tree-panel-hidden + .overview {
-        width: calc(75% - 25px);
+    #main .catalog-tree-panel + .list-container {
+        flex-grow: 1;
     }
 }
 
