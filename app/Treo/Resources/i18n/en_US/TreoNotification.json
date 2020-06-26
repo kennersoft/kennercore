@@ -2,6 +2,6 @@
   "treoNotifications": {
     "newModule": "New module '{{moduleName}}' available. <a href=\"/#ModuleManager/list\">Details</a>",
     "newModuleVersion": "New version '{{moduleVersion}}' available for module '{{moduleName}}'. <a href=\"/#ModuleManager/list\">Details</a>",
-    "newCoreVersion": "New version '%s' available for Treo System. <a href=\"/#Admin/upgrade\">Details</a>"
+    "newCoreVersion": "New version '%s' available for Kenner System. <a href=\"/#Admin/upgrade\">Details</a>"
   }
 }
