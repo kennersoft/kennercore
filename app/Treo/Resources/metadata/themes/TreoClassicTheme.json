@@ -1,6 +1,6 @@
 {
   "stylesheet": "client/modules/treo-core/css/treo/treo-classic-theme.css",
-  "logo": "client/modules/treo-core/img/kennersoft_logo_dark.png",
+  "logo": "client/modules/treo-core/img/kenner_core_logo_dark.png",
   "navbarIsVertical": true,
   "navbarStaticItemsHeight": 75,
   "recordTopButtonsStickTop": 61,
