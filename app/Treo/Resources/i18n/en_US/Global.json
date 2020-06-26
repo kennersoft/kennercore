@@ -181,9 +181,9 @@
     "ownerUser": "Owner"
   },
   "themes": {
-    "TreoDarkTheme": "Treo Dark Theme",
-    "TreoClassicTheme": "Treo Classic Theme",
-    "TreoLightTheme": "Treo Light Theme"
+    "TreoDarkTheme": "Kenner Dark Theme",
+    "TreoClassicTheme": "Kenner Classic Theme",
+    "TreoLightTheme": "Kenner Light Theme"
   },
   "exceptions": {
     "URL is invalid": "URL is invalid",
