@@ -19470,7 +19470,6 @@ ul.dropdown-menu > li.checkbox {
 button.category {
     color: #000;
     padding: 0;
-    margin-right: 4px;
 }
 
 button.category:hover,
@@ -19495,6 +19494,20 @@ button.category:focus {
     color: #2895ea;
     background-color: transparent;
     border-color: transparent;
+}
+
+#main ul.list-group-tree li.child button.category-icons {
+    margin-right: 4px;
+}
+
+#main ul.list-group-tree li.child button.child-category {
+    max-width: calc(100%);
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+#main ul.list-group-tree li.child .category-icons + .child-category {
+    max-width: calc(100% - 20px);
 }
 
 #main ul.list-group-tree li.child.active > button.category {
