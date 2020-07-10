@@ -77,7 +77,7 @@ Espo.define('treo-core:views/user-helper', ['view', 'lib!BootstrapTour'],
 
             const key = `${modal.cssName}-${modal.scope}`;
             const modalSteps = this.getModalSteps(key);
-            if (modalSteps.length) {
+            if (modalSteps.length && !this.modalOrder.includes(modal.cid)) {
                 const tour = this.modalTours[modal.cid] = new Tour({
                     name: key,
                     steps: modalSteps,
