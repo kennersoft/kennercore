@@ -112,6 +112,9 @@
             <li class="dropdown notifications-badge-container hidden-xs">
                 {{{notificationsBadge}}}
             </li>
+            <li class="dropdown user-helper">
+                <a class="user-helper-button" href="#" title="{{translate 'Show helper'}}"><span class="fa fa-question-circle"></span></a>
+            </li>
             {{#if globalSearch}}
             <li class="nav navbar-nav navbar-form global-search-container">
                 {{{globalSearch}}}

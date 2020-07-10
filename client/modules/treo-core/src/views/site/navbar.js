@@ -66,6 +66,13 @@ Espo.define('treo-core:views/site/navbar', 'class-replace!treo-core:views/site/n
                 'click .search-toggle': function () {
                     this.$el.find('.navbar-collapse ').toggleClass('open-search');
                 },
+
+                'click .user-helper-button': function (e) {
+                    e.preventDefault();
+                    this.factory.create('treo-core:views/user-helper', {
+                        scope: this.currentTab
+                    }, view => view.initHelpers());
+                }
             });
         },
 

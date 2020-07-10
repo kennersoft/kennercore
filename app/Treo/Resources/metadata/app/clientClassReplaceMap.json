@@ -5,6 +5,9 @@
   "app": [
     "treo-core"
   ],
+  "controller": [
+    "treo-core"
+  ],
   "view": [
     "treo-core"
   ],

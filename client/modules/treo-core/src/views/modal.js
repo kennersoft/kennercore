@@ -88,6 +88,8 @@ Espo.define('treo-core:views/modal', 'class-replace!treo-core:views/modal', func
                $(window).off('resize.adjust-modal-height').on('resize.adjust-modal-height', adjustHeight);
                adjustHeight();
            });
+
+           this.listenToOnce(this, 'after:render', () => Backbone.trigger('modal-shown', this));
        },
 
    });
