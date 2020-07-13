@@ -236,7 +236,11 @@ Espo.define('treo-core:views/user-helper', ['view', 'lib!BootstrapTour'],
         },
 
         getModalSteps(key) {
-            return this.getMetadata().get(['userHelper', this.scope, this.action, 'modals', key, 'steps']) || [];
+            return (this.getMetadata().get(['userHelper', this.scope, this.action, 'modals', key, 'steps']) || []).map((step, i) => {
+                step.title = (this.translate(`step-${i}`, 'modalSteps', this.scope) || {}).title || step.title;
+                step.content = (this.translate(`step-${i}`, 'modalSteps', this.scope) || {}).content || step.content;
+                return step;
+            });
         },
 
         getHelperTemplate() {
