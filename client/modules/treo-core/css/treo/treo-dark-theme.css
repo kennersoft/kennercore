@@ -18737,6 +18737,7 @@ body {
 .popover[class*="tour-"] .popover-navigation .popover-label {
     font-weight: 400;
     padding-bottom: 5px;
+    width: 100%;
 }
 
 .popover[class*="tour-"] .popover-navigation .popover-label *[data-role="disable"] {

@@ -69,9 +69,7 @@ Espo.define('treo-core:views/site/navbar', 'class-replace!treo-core:views/site/n
 
                 'click .user-helper-button': function (e) {
                     e.preventDefault();
-                    this.factory.create('treo-core:views/user-helper', {
-                        scope: this.currentTab
-                    }, view => view.initHelpers());
+                    this.userHelper();
                 }
             });
         },
@@ -352,6 +350,17 @@ Espo.define('treo-core:views/site/navbar', 'class-replace!treo-core:views/site/n
                 }
             });
         },
+
+        userHelper() {
+            if (this.getPreferences().get('disableUserHelper')) {
+                this.getPreferences().set({disableUserHelper: false});
+                this.getPreferences().save({disableUserHelper: false}, {patch: true});
+            }
+            this.factory.create('treo-core:views/user-helper', {
+                scope: this.currentTab,
+                force: true
+            }, view => view.initHelpers());
+        }
 
     });
 

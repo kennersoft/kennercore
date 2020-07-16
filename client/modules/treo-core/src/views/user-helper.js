@@ -49,44 +49,68 @@ Espo.define('treo-core:views/user-helper', ['view', 'lib!BootstrapTour'],
         modalTours: {},
 
         initHelpers(controller) {
+            if (this.options.force) {
+                this.clearAllHelpers();
+            }
+
             this.removingListeners();
             this.prepareBaseParams(controller);
 
-            localStorage.removeItem('tour_end');
+            if (controller) {
+                this.mainTimeout = window.setTimeout(() => {
+                    this.initMainTour(controller);
+                }, 2000);
+            } else {
+                this.initMainTour(controller);
+            }
 
-            this.initMainTour(controller);
-            this.listenTo(Backbone, 'modal-shown', modal => this.initModalTour(modal));
+            this.listenTo(Backbone, 'modal-shown', modal => {
+                window.clearTimeout(this.mainTimeout);
+                this.initModalTour(modal);
+            });
+        },
+
+        prepareBaseParams(controller) {
+            const routeParts = Backbone.history.fragment.split('/');
+
+            this.controller = this.controller || controller;
+            this.scope = this.scope || this.options.scope || (controller || {}).name;
+            this.action = routeParts[1] || '';
+        },
+
+        baseTourInit(steps, tourName) {
+            const name = tourName || 'tour';
+            const tour = new Tour({
+                name: name,
+                backdrop: true,
+                steps: steps,
+                template: this.getHelperTemplate(),
+                onEnd: this.endTour.bind(this),
+                onShown: this.reflexStepWaiter
+            });
+            tour.init();
+            if (!tour.ended()) {
+                this.checkStepsToDisplay(tour);
+            }
+
+            return tour;
         },
 
         initMainTour() {
+            const key = this.action ? `${this.scope}-${this.action}` : this.scope;
             const steps = this.getTourSteps();
             if (steps.length) {
-                this.tour = new Tour({
-                    steps: steps,
-                    template: this.getHelperTemplate(),
-                    onEnd: this.endTour.bind(this),
-                    onShown: this.reflexStepWaiter
-                });
-                this.tour.init();
-                this.checkStepsToDisplay(this.tour);
+                this.tour = this.baseTourInit(steps, key);
             }
         },
 
         initModalTour(modal) {
             this.endPrevTour();
 
-            const key = `${modal.cssName}-${modal.scope}`;
+            const key = modal.scope ? `${modal.cssName}-${modal.scope}` : modal.cssName;
             const modalSteps = this.getModalSteps(key);
-            if (modalSteps.length && !this.modalOrder.includes(modal.cid)) {
-                const tour = this.modalTours[modal.cid] = new Tour({
-                    name: key,
-                    steps: modalSteps,
-                    template: this.getHelperTemplate(),
-                    onEnd: this.endTour.bind(this),
-                    onShown: this.reflexStepWaiter
-                });
-                tour.init();
-                this.checkStepsToDisplay(tour);
+            if (!this.getPreferences().get('disableUserHelper') && modalSteps.length && !this.modalOrder.includes(modal.cid)) {
+                this.modalTours[modal.cid] = this.baseTourInit(modalSteps, key);
                 this.modalOrder.push(modal.cid);
             }
 
@@ -105,7 +129,7 @@ Espo.define('treo-core:views/user-helper', ['view', 'lib!BootstrapTour'],
             if (this.modalOrder.length) {
                 const cid = this.modalOrder[this.modalOrder.length - 1];
                 this.modalTours[cid].end();
-            } else {
+            } else if (this.tour) {
                 this.tour.end();
             }
         },
@@ -113,34 +137,39 @@ Espo.define('treo-core:views/user-helper', ['view', 'lib!BootstrapTour'],
         startPrevTour() {
             if (!this.getPreferences().get('disableUserHelper')) {
                 const prev = this.modalTours[this.modalOrder[this.modalOrder.length - 1]] || this.tour;
-                prev.start();
-                prev.next();
+                if (prev && !prev.ended()) {
+                    prev.init();
+                    this.checkStepsToDisplay(prev);
+                }
             }
         },
 
         checkStepsToDisplay(tour) {
             const updateStepStates = () => {
                 let notUpdated = true;
-                this.visibleSteps = [];
-                this.orphanSteps = [];
+                const visibleSteps = [];
                 tour._options.steps.forEach((item, i) => {
+                    item.i = i;
                     const step = tour.getStep(i);
-                    tour._isOrphan(step) ? this.orphanSteps.push(step) : this.visibleSteps.push(step);
+                    if (!tour._isOrphan(step)) {
+                        visibleSteps.push(step);
+                    }
                 });
 
-                const currStepInd = tour.getCurrentStep();
-                const step = tour.getStep(currStepInd);
-                if (currStepInd === null && this.visibleSteps.length || currStepInd !== null && tour._isOrphan(step)) {
-                    const newStep = this.visibleSteps[0];
-                    if (newStep.i !== currStepInd) {
-                        tour.setCurrentStep(newStep.i);
-                        tour.showStep(newStep.i);
-                        notUpdated = false;
+                const curr = tour.getCurrentStep();
+                const step = tour.getStep(curr);
+                let newStep;
+                if (visibleSteps.length) {
+                    if (curr === null || tour._isOrphan(step) || !tour._isLast()) {
+                        newStep = visibleSteps[0];
+                    } else {
+                        newStep = tour.getStep(curr + 1);
                     }
-                } else if (currStepInd !== null && !tour._isOrphan(step)) {
-                    tour.showStep(currStepInd);
+                    tour.setCurrentStep(newStep.i);
+                    tour.showStep(newStep.i);
                     notUpdated = false;
                 }
+
                 return notUpdated;
             };
 
@@ -150,8 +179,12 @@ Espo.define('treo-core:views/user-helper', ['view', 'lib!BootstrapTour'],
         },
 
         reflexStepWaiter(tour) {
-            let wasHidden = false;
+            const prev = tour.getStep(tour.getCurrentStep() - 1);
+            if (!prev || !prev.reflex) {
+                return;
+            }
 
+            let wasHidden = false;
             const checkStep = () => {
                 const currentStep = tour.getCurrentStep();
                 const step = tour.getStep(currentStep);
@@ -160,7 +193,6 @@ Espo.define('treo-core:views/user-helper', ['view', 'lib!BootstrapTour'],
                 if (isOrphan) {
                     if ($('.popover[class*="tour-"]').hasClass('in')) {
                         if (wasHidden) {
-                            window.clearInterval(tour.reflexStepInterval);
                             tour.next();
                         } else {
                             wasHidden = true;
@@ -180,15 +212,12 @@ Espo.define('treo-core:views/user-helper', ['view', 'lib!BootstrapTour'],
             }
         },
 
-        prepareBaseParams(controller) {
-            const routeParts = Backbone.history.fragment.split('/');
-
-            this.controller = this.controller || controller;
-            this.scope = this.scope || this.options.scope || (controller || {}).name;
-            this.action = routeParts[1] || (controller || {}).defaultAction || 'list';
-        },
-
         removingListeners() {
+            Backbone.trigger('helper-created');
+            this.listenToOnce(Backbone, 'helper-created', () => {
+                this.remove();
+            });
+
             this.listenToOnce(this.getBaseController(), 'action', () => {
                 [this.tour, ...Object.values(this.modalTours)].forEach(item => item && item.end());
                 this.remove();
@@ -209,14 +238,10 @@ Espo.define('treo-core:views/user-helper', ['view', 'lib!BootstrapTour'],
         endTour(tour) {
             this.clearIntervals();
 
+            let end = false;
             const check = $('input[data-role="disable"]');
             if (check.get().length) {
-                const end = check[0].checked;
-                if (!end) {
-                    localStorage.removeItem('tour_end');
-                    tour._removeState('end');
-                }
-
+                end = check[0].checked;
                 const changed = !_.isEqual(this.getPreferences().get('disableUserHelper'), end);
                 if (changed) {
                     this.getPreferences().set({disableUserHelper: end});
@@ -225,6 +250,21 @@ Espo.define('treo-core:views/user-helper', ['view', 'lib!BootstrapTour'],
                     });
                 }
             }
+            const notLast = tour.getCurrentStep() !== null && tour._isLast();
+            if (!end && notLast) {
+                tour._removeState('end');
+            }
+        },
+
+        clearAllHelpers() {
+            const keys = [];
+            Object.entries(this.getMetadata().get(['userHelper']) || {}).forEach(([scope, actions]) => {
+                Object.entries(actions || {}).forEach(([action, data]) => {
+                    keys.push(`${scope}-${action}`);
+                    Object.keys((data || {}).modals || {}).forEach(modal => keys.push(modal));
+                });
+            });
+            keys.forEach(key => ['current_step', 'end'].forEach(item => localStorage.removeItem(`${key}_${item}`)));
         },
 
         getTourSteps() {
@@ -244,19 +284,16 @@ Espo.define('treo-core:views/user-helper', ['view', 'lib!BootstrapTour'],
         },
 
         getHelperTemplate() {
-            const checked = this.getPreferences().get('disableUserHelper') ? 'checked' : '';
-
             return `<div class="popover" role="tooltip">
                         <div class="arrow"></div>
                         <h3 class="popover-title"></h3>
                         <div class="popover-content"></div>
                         <div class="popover-navigation">
                             <label class="popover-label">
-                                <input type="checkbox" data-role="disable" ${checked}>
+                                <input type="checkbox" data-role="disable">
                                 <span>${this.translate('doNotShowAgain', 'buttons', 'Tour')}</span>
                             </label>
                             <div class="btn-group">
-                                <button class="btn btn-sm btn-default" data-role="prev">&laquo; ${this.translate('Prev', 'buttons', 'Tour')}</button>
                                 <button class="btn btn-sm btn-default" data-role="next">${this.translate('Next', 'buttons', 'Tour')} &raquo;</button>
                                 <button class="btn btn-sm btn-default" data-role="pause-resume" data-pause-text="Pause" data-resume-text="Resume">
                                     ${this.translate('Pause', 'buttons', 'Tour')}

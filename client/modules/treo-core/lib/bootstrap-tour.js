@@ -534,7 +534,7 @@ var bind = function(fn, me){ return function(){ return fn.apply(me, arguments); 
         };
 
         Tour.prototype._isOrphan = function(step) {
-            var stepEl = $(step.element);
+            var stepEl = $(step.element); //kennersoft
             return (step.element == null) || !stepEl.length || stepEl.is(':hidden') && (stepEl[0].namespaceURI !== 'http://www.w3.org/2000/svg');
         };
 
@@ -549,6 +549,7 @@ var bind = function(fn, me){ return function(){ return fn.apply(me, arguments); 
             }
             step = this.getStep(i);
             if (step.backdrop) {
+                this._hideOverlayElement(step);//kennersoft
                 this._showOverlayElement(step);
             }
             this._showPopover(step, i);
@@ -577,7 +578,7 @@ var bind = function(fn, me){ return function(){ return fn.apply(me, arguments); 
                 $(step.reflexElement).addClass('tour-step-element-reflex').off((this._reflexEvent(step.reflex)) + ".tour-" + this._options.name).on((this._reflexEvent(step.reflex)) + ".tour-" + this._options.name, (function(_this) {
                     return function() {
                         if (_this._isLast()) {
-                            return _this.next(true);
+                            return _this.next(true);//kennersoft
                         } else {
                             return _this.end();
                         }
@@ -603,7 +604,7 @@ var bind = function(fn, me){ return function(){ return fn.apply(me, arguments); 
             }
             this._reposition($tip, step);
             $element.one('remove', function(e) {
-                $element.popover('destroy');
+                $element.popover('destroy');//kennersoft
             });
             if (isOrphan) {
                 return this._center($tip);
@@ -879,8 +880,8 @@ var bind = function(fn, me){ return function(){ return fn.apply(me, arguments); 
                 };
             } else {
                 elementData = {
-                    width: $backdropElement.innerWidth(),
-                    height: $backdropElement.innerHeight(),
+                    width: $backdropElement.outerWidth(),
+                    height: $backdropElement.outerHeight(),
                     offset: $backdropElement.offset()
                 };
                 $backdropElement.addClass('tour-step-backdrop');

@@ -1,6 +1,6 @@
 {
   "BootstrapTour": {
-    "path": "client/modules/treo-core/lib/bootstrap-tour.js",
+    "path": "client/modules/treo-core/lib/bootstrap-tour.min.js",
     "exportsTo": "window",
     "exportsAs": "bootstrapTour"
   }
