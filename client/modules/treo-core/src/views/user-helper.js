@@ -260,7 +260,8 @@ Espo.define('treo-core:views/user-helper', ['view', 'lib!BootstrapTour'],
             const keys = [];
             Object.entries(this.getMetadata().get(['userHelper']) || {}).forEach(([scope, actions]) => {
                 Object.entries(actions || {}).forEach(([action, data]) => {
-                    keys.push(`${scope}-${action}`);
+                    const key = action ? `${scope}-${action}` : scope;
+                    keys.push(key);
                     Object.keys((data || {}).modals || {}).forEach(modal => keys.push(modal));
                 });
             });
