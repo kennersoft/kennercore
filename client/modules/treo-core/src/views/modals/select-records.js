@@ -56,7 +56,98 @@ Espo.define('treo-core:views/modals/select-records', ['class-replace!treo-core:v
             this.listLayout = this.options.listLayout || this.listLayout;
             this.rowActionsDisabled = this.options.rowActionsDisabled || this.rowActionsDisabled;
 
-            Dep.prototype.setup.call(this);
+            this.filters = this.filters || this.options.filters || {};
+            this.boolFilterList = this.boolFilterList || this.options.boolFilterList || [];
+            this.primaryFilterName = this.primaryFilterName || this.options.primaryFilterName || null;
+
+            if ('multiple' in this.options) {
+                this.multiple = this.options.multiple;
+            }
+
+            if ('createButton' in this.options) {
+                this.createButton = this.options.createButton;
+            }
+
+            this.massRelateEnabled = this.options.massRelateEnabled;
+
+            this.buttonList = [
+                {
+                    name: 'cancel',
+                    label: 'Cancel'
+                }
+            ];
+
+            if (this.multiple) {
+                this.buttonList.unshift({
+                    name: 'select',
+                    style: 'primary',
+                    label: 'Select',
+                    disabled: true,
+                    onClick: function (dialog) {
+                        var listView = this.getView('list');
+
+                        if (listView.allResultIsChecked) {
+                            var where = this.collection.where;
+                            this.trigger('select', {
+                                massRelate: true,
+                                where: where
+                            });
+                        } else {
+                            var list = listView.getSelected();
+                            if (list.length) {
+                                this.trigger('select', list);
+                            }
+                        }
+                        dialog.close();
+                    }.bind(this),
+                });
+            }
+
+            this.scope = this.entityType = this.options.scope || this.scope;
+
+            if (this.noCreateScopeList.indexOf(this.scope) !== -1) {
+                this.createButton = false;
+            }
+
+            if (this.createButton) {
+                if (
+                    !this.getAcl().check(this.scope, 'create')
+                    ||
+                    this.getMetadata().get(['clientDefs', this.scope, 'createDisabled'])
+                ) {
+                    this.createButton = false;
+                }
+            }
+
+            this.header = '';
+            var iconHtml = this.getHelper().getScopeColorIconHtml(this.scope);
+            this.header += this.getLanguage().translate(this.scope, 'scopeNamesPlural');
+            this.header = iconHtml + this.header;
+
+            this.waitForView('list');
+            if (this.searchPanel) {
+                this.waitForView('search');
+            }
+
+            this.createCollection(collection => {
+                this.loadSearch();
+                this.wait(true);
+                this.loadList();
+            });
+        },
+
+        createCollection(callback) {
+            this.getCollectionFactory().create(this.scope, collection => {
+                collection.maxSize = this.getConfig().get('recordsPerPageSmall') || 5;
+                this.collection = collection;
+
+                this.defaultSortBy = collection.sortBy;
+                this.defaultAsc = collection.asc;
+
+                if (callback) {
+                    callback(collection);
+                }
+            });
         },
 
         loadSearch: function () {
@@ -85,7 +176,7 @@ Espo.define('treo-core:views/modals/select-records', ['class-replace!treo-core:v
                     let data = {};
                     item.value.forEach(elem => {
                         if (elem in this.boolFilterData) {
-                            data[elem] = this.boolFilterData[elem];
+                            data[elem] = this.boolFilterData[elem].call(this);
                         }
                     });
                     item.data = data;
