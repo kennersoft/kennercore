@@ -18,6 +18,7 @@
             }
             #general-container {
                 padding: 0;
+                margin-bottom: 48px;
                 border: 1px solid #c0c0c0;
             }
             #general-container header#header {
@@ -29,11 +30,9 @@
                 height: auto;
             }
             #general-container div#navbar div.navbar a.logo img {
-                max-width: 92px;
                 margin: 10px 0 7px 14px;
             }
             #general-container .main-template {
-                min-height: 720px;
                 padding: 0;
             }
             #general-container #main-template .msg-box {
@@ -42,9 +41,6 @@
                 height: auto;
                 max-height: 90px;
                 margin-bottom: 0;
-            }
-            #general-container .main-template .modal-body {
-                min-height: 620px;
             }
             .stepTitle {
                 padding: 5px;
@@ -86,7 +82,7 @@
                 }
 
                 .content.container {
-                    min-height: calc(100% - 28px);
+                    height: calc(100% - 28px);
                     padding: 0 0;
                 }
 
@@ -95,14 +91,17 @@
                 }
 
                 #general-container,
-                .panel-body,
                 #main-template {
                     height: 100%;
+                    margin: 0;
+                    padding: 0;
+                }
+                #general-container .panel-body {
+                    height: calc(100% - 47px);
                 }
 
-                #general-container .main-template,
-                #general-container .main-template .modal-body {
-                    min-height: unset;
+                #general-container div#navbar div.navbar a.logo img {
+                    max-width: 100%;
                 }
 
                 #navbar > .navbar {
