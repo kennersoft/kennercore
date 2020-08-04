@@ -175,8 +175,10 @@ Espo.define('treo-core:views/modals/select-records', ['class-replace!treo-core:v
                 if (item.type === 'bool') {
                     let data = {};
                     item.value.forEach(elem => {
-                        if (elem in this.boolFilterData) {
+                        if (typeof this.boolFilterData[elem] === 'function') {
                             data[elem] = this.boolFilterData[elem].call(this);
+                        } else if (elem in this.boolFilterData) {
+                            data[elem] = this.boolFilterData[elem];
                         }
                     });
                     item.data = data;
