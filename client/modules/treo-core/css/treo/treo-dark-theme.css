@@ -16950,10 +16950,11 @@ pre > code {
     #notifications-panel {
         position: fixed;
         width: 100%;
-        top: 0;
+        top: 44px;
         right: none;
         left: 0;
-        margin-right: 10px
+        margin-right: 10px;
+        z-index: 1060;
     }
 
     #global-search-panel {
@@ -19867,7 +19868,7 @@ button.category:focus {
         left: 0;
         right: 0;
         top: 0;
-        z-index: 9;
+        z-index: 1050;
     }
 
     .navbar-header {
@@ -20715,7 +20716,7 @@ td[data-name="draggableIcon"] {
     .queue-panel-container {
         position: fixed;
         width: 100%;
-        top: 0;
+        top: 44px;
         left: 0;
         margin-right: 10px
     }
@@ -21134,8 +21135,8 @@ select {
         height: 28px !important;
     }
 
-    .record .detail .panel .panel-heading > .btn-group {
-        top: -6px;
+    .record .detail .bottom .panel .panel-heading > .btn-group {
+        top: -5px;
     }
 
     .record .detail .panel .panel-body.panel-collapse.collapse.in > .list-container {
@@ -21152,11 +21153,11 @@ select {
         padding: 5px 0px;
     }
 
-    .side > .panel.panel-default.panel-default {
+    .side > .panel.panel-default {
         margin: 0px -15px;
     }
 
-    .side > .panel.panel-default.panel-default .panel-heading {
+    .side > .panel.panel-default .panel-heading {
         margin: 0;
     }
 }
