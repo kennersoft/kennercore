@@ -288,7 +288,7 @@ Espo.define('treo-core:views/user-helper', ['view', 'lib!BootstrapTour'],
             return `<div class="popover" role="tooltip">
                         <div class="arrow"></div>
                         <h3 class="popover-title"></h3>
-                        <div class="popover-content"></div>
+                        <div class="popover-content text-justify"></div>
                         <div class="popover-navigation">
                             <label class="popover-label">
                                 <input type="checkbox" data-role="disable">

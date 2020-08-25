@@ -145,6 +145,27 @@ Espo.define('treo-core:views/site/navbar', 'class-replace!treo-core:views/site/n
             });
         },
 
+        afterRender() {
+            Dep.prototype.afterRender.call(this);
+
+            this.insertUserHelperToNavbar();
+        },
+
+        insertUserHelperToNavbar() {
+            const globalSearchLi = this.$el.find('ul.navbar-right .global-search-container');
+            if (globalSearchLi) {
+                globalSearchLi.before(this.getUserHelperHtml());
+            }
+        },
+
+        getUserHelperHtml() {
+            return `<li class="dropdown user-helper">
+                        <a class="user-helper-button" href="#" title="${this.translate('Show helper')}">
+                            <span class="fa fa-question-circle"></span>
+                        </a>
+                    </li>`;
+        },
+
         switchMinimizer(afterTrigger) {
             let $body = $('body');
             if (!afterTrigger && $body.hasClass('minimized')) {
