@@ -128,7 +128,7 @@ To create your new KennerCore application, first make sure you're using PHP 7.1 
 
 ### License
 
-KennerCore is published under the GNU GPLv3 [license](LICENSE.txt).
+KennerCore is published under the GNU GPLv3 [license](LICENSE.txt). KennerCore based on TreoCore. TreoCore is an open-source software ecosystem developed by TreoLabs GmbH and distributed under GPLv3 License for free.
 
 ### Support
 
