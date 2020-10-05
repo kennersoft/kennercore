@@ -35,14 +35,154 @@
  * the "KennerCore", "EspoCRM" and "TreoCore" words.
  */
 
-Espo.define('treo-core:views/record/panels/relationship', ['class-replace!treo-core:views/record/panels/relationship', 'search-manager'], function (Dep, SearchManager) {
-
-    return Dep.extend({
+Espo.define('treo-core:views/record/panels/relationship', ['class-replace!treo-core:views/record/panels/relationship', 'views/record/panels/bottom', 'search-manager'],
+    (Dep, Bottom, SearchManager) => Dep.extend({
 
         filtersLayoutLoaded: false,
 
         setup() {
-            Dep.prototype.setup.call(this);
+            Bottom.prototype.setup.call(this);
+
+            this.link = this.link || this.defs.link || this.panelName;
+
+            if (!this.scope && !(this.link in this.model.defs.links)) {
+                throw new Error('Link \'' + this.link + '\' is not defined in model \'' + this.model.name + '\'');
+            }
+            this.title = this.title || this.translate(this.link, 'links', this.model.name);
+            this.scope = this.scope || this.model.defs.links[this.link].entity;
+
+            if (!this.getConfig().get('scopeColorsDisabled')) {
+                var iconHtml = this.getHelper().getScopeColorIconHtml(this.scope);
+                if (iconHtml) {
+                    if (this.defs.label) {
+                        this.titleHtml = iconHtml + this.translate(this.defs.label, 'labels', this.scope);
+                    } else {
+                        this.titleHtml = iconHtml + this.title;
+                    }
+                }
+            }
+
+            var url = this.url || this.model.name + '/' + this.model.id + '/' + this.link;
+
+            if (!this.readOnly && !this.defs.readOnly) {
+                if (!('create' in this.defs)) {
+                    this.defs.create = true;
+                }
+                if (!('select' in this.defs)) {
+                    this.defs.select = true;
+                }
+            }
+
+            this.filterList = this.defs.filterList || this.filterList || null;
+
+            if (this.filterList && this.filterList.length) {
+                this.filter = this.getStoredFilter();
+            }
+
+            if (this.defs.create) {
+                if (this.getAcl().check(this.scope, 'create') && !~['User', 'Team'].indexOf()) {
+                    this.buttonList.push({
+                        title: 'Create',
+                        action: this.defs.createAction || 'createRelated',
+                        link: this.link,
+                        acl: 'create',
+                        aclScope: this.scope,
+                        html: '<span class="fas fa-plus"></span>',
+                        data: {
+                            link: this.link,
+                        }
+                    });
+                }
+            }
+
+            if (this.defs.select) {
+                var data = {link: this.link};
+                if (this.defs.selectPrimaryFilterName) {
+                    data.primaryFilterName = this.defs.selectPrimaryFilterName;
+                }
+                if (this.defs.selectBoolFilterList) {
+                    data.boolFilterList = this.defs.selectBoolFilterList;
+                }
+
+                this.actionList.unshift({
+                    label: 'Select',
+                    action: this.defs.selectAction || 'selectRelated',
+                    data: data,
+                    acl: 'edit',
+                    aclScope: this.model.name
+                });
+            }
+
+            this.setupActions();
+
+            var layoutName = 'listSmall';
+            this.setupListLayout();
+
+            if (this.listLayoutName) {
+                layoutName = this.listLayoutName;
+            }
+
+            var listLayout = null;
+            var layout = this.defs.layout || null;
+            if (layout) {
+                if (typeof layout == 'string') {
+                    layoutName = layout;
+                } else {
+                    layoutName = 'listRelationshipCustom';
+                    listLayout = layout;
+                }
+            }
+
+            var sortBy = this.defs.sortBy || null;
+            var asc = this.defs.asc || null;
+
+            if (this.defs.orderBy) {
+                sortBy = this.defs.orderBy;
+                asc = true;
+                if (this.defs.orderDirection) {
+                    if (this.defs.orderDirection && (this.defs.orderDirection === true || this.defs.orderDirection.toLowerCase() === 'DESC')) {
+                        asc = false;
+                    }
+                }
+            }
+
+            this.wait(true);
+            this.getCollectionFactory().create(this.scope, function (collection) {
+                collection.maxSize = this.getConfig().get('recordsPerPageSmall') || 5;
+
+                if (this.defs.filters) {
+                    var searchManager = new SearchManager(collection, 'listRelationship', false, this.getDateTime());
+                    searchManager.setAdvanced(this.defs.filters);
+                    collection.where = searchManager.getWhere();
+                }
+
+                collection.url = collection.urlRoot = url;
+                if (sortBy) {
+                    collection.sortBy = sortBy;
+                }
+                if (asc) {
+                    collection.asc = asc;
+                }
+                this.collection = collection;
+
+                this.setFilter(this.filter);
+
+                if (this.fetchOnModelAfterRelate) {
+                    this.listenTo(this.model, 'after:relate', function () {
+                        collection.fetch();
+                    }, this);
+                }
+
+                this.listenTo(this.model, 'update-all', function () {
+                    collection.fetch();
+                }, this);
+
+                this.once('after:render', () => this.createRecordListView(layoutName, listLayout));
+
+                this.wait(false);
+            }, this);
+
+            this.setupFilterActions();
 
             this.addReadyCondition(() => {
                 return this.filtersLayoutLoaded;
@@ -65,6 +205,34 @@ Espo.define('treo-core:views/record/panels/relationship', ['class-replace!treo-c
 
                 this.tryReady();
             });
+        },
+
+        createRecordListView(layoutName, listLayout) {
+            var viewName = this.defs.recordListView || this.getMetadata().get('clientDefs.' + this.scope + '.recordViews.list') || 'Record.List';
+
+            const options = this.modifyRecordListOptions({
+                collection: this.collection,
+                layoutName: layoutName,
+                listLayout: listLayout,
+                checkboxes: false,
+                rowActionsView: this.defs.readOnly ? false : (this.defs.rowActionsView || this.rowActionsView),
+                buttonsDisabled: true,
+                el: this.options.el + ' .list-container',
+                skipBuildRows: true
+            });
+
+            this.createView('list', viewName, options, view => {
+                view.getSelectAttributeList(selectAttributeList => {
+                    if (selectAttributeList) {
+                        this.collection.data.select = selectAttributeList.join(',');
+                    }
+                    this.collection.fetch();
+                });
+            });
+        },
+
+        modifyRecordListOptions(options) {
+            return options;
         },
 
         actionShowFullList(data) {
@@ -156,5 +324,5 @@ Espo.define('treo-core:views/record/panels/relationship', ['class-replace!treo-c
             });
         },
 
-    });
-});
+    })
+);

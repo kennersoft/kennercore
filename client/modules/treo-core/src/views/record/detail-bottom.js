@@ -83,6 +83,7 @@ Espo.define('treo-core:views/record/detail-bottom', 'class-replace!treo-core:vie
         },
 
         setup: function () {
+            this.mode = this.options.mode || this.mode;
             this.type = this.mode;
             if ('type' in this.options) {
                 this.type = this.options.type;

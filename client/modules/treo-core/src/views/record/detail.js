@@ -55,6 +55,8 @@ Espo.define('treo-core:views/record/detail', 'class-replace!treo-core:views/reco
         setup: function () {
             Dep.prototype.setup.call(this);
 
+            this.bottomView = this.getMetadata().get(['clientDefs', this.model.name, 'bottomViews', this.type]) || this.bottomView;
+
             if (this.collection) {
                 this.stopListening(this.model, 'destroy');
                 this.listenTo(this.model, 'destroy', function () {
@@ -284,7 +286,8 @@ Espo.define('treo-core:views/record/detail', 'class-replace!treo-core:views/reco
                 inlineEditDisabled: this.inlineEditDisabled,
                 recordHelper: this.recordHelper,
                 recordViewObject: this,
-                portalLayoutDisabled: this.portalLayoutDisabled
+                portalLayoutDisabled: this.portalLayoutDisabled,
+                mode: this.mode || 'detail'
             }, view => {
                 this.listenToOnce(view, 'after:render', () => {
                     this.createPanelNavigationView(view.panelList);
