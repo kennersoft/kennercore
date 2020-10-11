@@ -1,0 +1,42 @@
+{
+  "": {
+    "steps": [
+      {
+        "element": ".nav.navbar-nav li.global-search-container",
+        "title": "Global search",
+        "content": "You can search all the records existing in the KennerCore system using the global search functionality.<br>The list of entities available for search is configured by the administrator.",
+        "smartPlacement": true
+      },
+      {
+        "element": ".nav.navbar-nav li.user-helper",
+        "title": "User helper",
+        "content": "This button is used to display tooltips, if any.",
+        "smartPlacement": true
+      },
+      {
+        "element": ".nav.navbar-nav li.notifications-badge-container",
+        "title": "Notifications",
+        "content": "Here you can see system notifications.",
+        "smartPlacement": true
+      },
+      {
+        "element": ".nav.navbar-nav li.queue-badge-container",
+        "title": "Queue Manager",
+        "content": "In the Queue Manager pop-up, the most recent KennerCore operations, which were executed in the background mode, are displayed. Additionally, the information on the data import performed with the help of import feeds is shown in the Queue Manager pop-up.",
+        "smartPlacement": true
+      },
+      {
+        "element": ".nav.navbar-nav li.quick-create-container",
+        "title": "Quick Create",
+        "content": "To create new records from anywhere, click the quick create button.<br>The list of entities available for creation is configured by the administrator.",
+        "smartPlacement": true
+      },
+      {
+        "element": ".nav.navbar-nav li.menu-container",
+        "title": "Administration menu",
+        "content": "You can easily filter category list by this input text area.",
+        "smartPlacement": true
+      }
+    ]
+  }
+}

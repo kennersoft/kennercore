@@ -1,0 +1,9 @@
+{
+  "buttons": {
+    "Next": "Next",
+    "Prev": "Prev",
+    "Pause": "Pause",
+    "End tour": "End tour",
+    "doNotShowAgain": "Do not show this again."
+  }
+}
