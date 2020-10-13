@@ -38,6 +38,8 @@
 Espo.define('treo-core:views/record/panels/relationship', ['class-replace!treo-core:views/record/panels/relationship', 'views/record/panels/bottom', 'search-manager'],
     (Dep, Bottom, SearchManager) => Dep.extend({
 
+        disableListSelectParam: false,
+
         filtersLayoutLoaded: false,
 
         setup() {
@@ -50,6 +52,8 @@ Espo.define('treo-core:views/record/panels/relationship', ['class-replace!treo-c
             }
             this.title = this.title || this.translate(this.link, 'links', this.model.name);
             this.scope = this.scope || this.model.defs.links[this.link].entity;
+            this.disableListSelectParam = this.disableListSelectParam || this.options.defs.disableListSelectParam
+                || this.defs.disableListSelectParam;
 
             if (!this.getConfig().get('scopeColorsDisabled')) {
                 var iconHtml = this.getHelper().getScopeColorIconHtml(this.scope);
@@ -222,12 +226,16 @@ Espo.define('treo-core:views/record/panels/relationship', ['class-replace!treo-c
             });
 
             this.createView('list', viewName, options, view => {
-                view.getSelectAttributeList(selectAttributeList => {
-                    if (selectAttributeList) {
-                        this.collection.data.select = selectAttributeList.join(',');
-                    }
+                if (!this.disableListSelectParam) {
+                    view.getSelectAttributeList(selectAttributeList => {
+                        if (selectAttributeList) {
+                            this.collection.data.select = selectAttributeList.join(',');
+                        }
+                        this.collection.fetch();
+                    });
+                } else {
                     this.collection.fetch();
-                });
+                }
             });
         },
 
