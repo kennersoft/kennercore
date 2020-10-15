@@ -92,5 +92,16 @@ Espo.define('treo-core:view', 'class-replace!treo-core:view',
             }
         },
 
+        getParentView(level) {
+            let parent = this;
+            level = parseInt(level) || 1;
+
+            for (let i = 0; i < level; i++) {
+                parent = Dep.prototype.getParentView.call(parent);
+            }
+
+            return parent;
+        }
+
     })
 );

@@ -52,6 +52,12 @@ Espo.define('treo-core:views/detail', 'class-replace!treo-core:views/detail',
             return data;
         },
 
+        setup() {
+            this.headerView = this.getMetadata().get(['clientDefs', this.model.name, 'views', 'header']) || this.headerView;
+
+            Dep.prototype.setup.call(this);
+        },
+
         actionSelectRelatedEntity(data) {
             let link = data.link;
             let scope = data.scope || this.model.defs['links'][link].entity;

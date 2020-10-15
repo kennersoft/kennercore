@@ -215,6 +215,9 @@
   "views/edit": [
     "treo-core"
   ],
+  "views/modals/detail": [
+    "treo-core"
+  ],
   "views/modals/edit": [
     "treo-core"
   ],
