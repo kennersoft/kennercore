@@ -49,11 +49,14 @@ Espo.define('treo-core:views/modals/select-entity-and-records', 'views/modals/se
         },
 
         getSelectBoolFilterList() {
-            const mainEntity = this.model.get('mainEntity');
-            const selectedLink = this.model.get('selectedLink');
-            const keyPath = ['clientDefs', mainEntity, 'relationshipPanels', selectedLink, 'selectBoolFilterList'];
+            this.selectBoolFilterList = [];
+            if (this.options.type === 'addRelation') {
+                const keyPath = ['clientDefs', this.model.get('mainEntity'), 'relationshipPanels',
+                    this.model.get('selectedLink'), 'selectBoolFilterList'];
+                this.selectBoolFilterList = this.getMetadata().get(keyPath) || [];
+            }
 
-            return this.selectBoolFilterList = this.getMetadata().get(keyPath) || [];
+            return this.selectBoolFilterList;
         },
 
         getSelectBoolFilterData() {
@@ -127,7 +130,7 @@ Espo.define('treo-core:views/modals/select-entity-and-records', 'views/modals/se
         setupPipelines() {
             const mainEntity = this.model.get('mainEntity');
             const selectedLink = this.model.get('selectedLink');
-            const keyPath = ['clientDefs', mainEntity, 'addRelationPipelines', selectedLink];
+            const keyPath = ['clientDefs', mainEntity, `${this.options.type}Pipelines`, selectedLink];
 
             const pipelines = this.getMetadata().get(keyPath);
 
