@@ -68,7 +68,7 @@ class TreoCleanup extends Base
     {
         parent::__construct($container);
 
-        $this->date = (new \DateTime())->modify("-3 month")->format('Y-m-d');
+        $this->date = (new \DateTime())->modify("-2 month")->format('Y-m-d');
         $this->db = $this->getConfig()->get('database')['dbname'];
     }
 
@@ -164,6 +164,15 @@ class TreoCleanup extends Base
     protected function cleanupNotifications(): void
     {
         $this->exec("DELETE FROM `notification` WHERE DATE(created_at)<'{$this->date}'");
+    }
+
+    /**
+     * Cleanup ImportResults
+     */
+    protected function cleanupImportResults(): void
+    {
+        $this->exec("DELETE FROM `import_result_log` WHERE import_result_id in (SELECT id FROM import_result WHERE DATE(created_at)<'{$this->date}')");
+        $this->exec("DELETE FROM `import_result` WHERE DATE(created_at)<'{$this->date}'");
     }
 
     /**
