@@ -85,6 +85,7 @@ class TreoCleanup extends Base
         $this->cleanupAuthLog();
         $this->cleanupActionHistory();
         $this->cleanupNotifications();
+        $this->cleanupImportResults();
         $this->cleanupDeleted();
         $this->cleanupAttachments();
         $this->cleanupDbSchema();
@@ -171,8 +172,9 @@ class TreoCleanup extends Base
      */
     protected function cleanupImportResults(): void
     {
-        $this->exec("DELETE FROM `import_result_log` WHERE import_result_id in (SELECT id FROM import_result WHERE DATE(created_at)<'{$this->date}')");
-        $this->exec("DELETE FROM `import_result` WHERE DATE(created_at)<'{$this->date}'");
+        $date = (new \DateTime())->modify("-2 week")->format('Y-m-d');
+        $this->exec("DELETE FROM `import_result_log` WHERE import_result_id in (SELECT id FROM import_result WHERE DATE(created_at)<'{$date}')");
+        $this->exec("DELETE FROM `import_result` WHERE DATE(created_at)<'{$date}'");
     }
 
     /**
