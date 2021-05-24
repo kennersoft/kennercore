@@ -57,6 +57,13 @@ class ComposerAutoUpdate extends Base
      */
     public function run()
     {
+        file_put_contents(Composer::CHECK_UP_FILE, '1');
+        sleep(2);
+        if (file_exists(Composer::CHECK_UP_FILE)) {
+            $GLOBALS['log']->error('ComposerAutoUpdate: The composer daemon is not running!');
+            return false;
+        }
+
         // cancel changes
         $this->getComposerService()->cancelChanges();
 
