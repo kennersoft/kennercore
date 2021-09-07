@@ -38,8 +38,23 @@
 
 namespace Espo\Core\Utils;
 
+use Treo\Core\Container;
+
 class System
 {
+    /**
+     * @var Container
+     */
+    protected $container;
+
+    /**
+     * System constructor.
+     * @param Container $container
+     */
+    public function __construct()
+    {
+        $this->container = new Container();
+    }
     /**
      * Get web server name
      *
@@ -119,7 +134,9 @@ class System
             return $_SERVER['PHP_PATH'];
         }
 
-        return defined("PHP_BINDIR") ? PHP_BINDIR . DIRECTORY_SEPARATOR . 'php' : 'php';
+        $phpVersion = $this->getContainer()->get('config')->get('cronPhpVersion') ?? 'php';
+
+        return defined("PHP_BINDIR") ? PHP_BINDIR . DIRECTORY_SEPARATOR . $phpVersion : 'php';
     }
 
     /**
@@ -182,5 +199,13 @@ class System
         }
 
         return true;
+    }
+
+    /**
+     * @return Container
+     */
+    protected function getContainer(): Container
+    {
+        return $this->container;
     }
 }

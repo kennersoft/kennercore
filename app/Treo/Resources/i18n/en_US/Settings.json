@@ -3,11 +3,13 @@
     "treoId": "ID",
     "isStreamSide": "Is stream in side",
     "isStreamPanelFirst": "Is stream panel first",
-    "unitsOfMeasure": "Units Of Measure"
+    "unitsOfMeasure": "Units Of Measure",
+    "cronPhpVersion": "Php version which will be run by cron"
   },
   "tooltips": {
     "isStreamSide": "If enabled: Stream panel will be shown in side.",
-    "isStreamPanelFirst": "If enabled: Stream panel will be shown right after overview."
+    "isStreamPanelFirst": "If enabled: Stream panel will be shown right after overview.",
+    "cronPhpVersion": "Php version to be used for cron.<br>Example, <strong>php7.3</strong><br>Leave empty for default value."
   },
   "labels": {
     "Representation": "Representation",

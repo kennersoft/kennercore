@@ -27,6 +27,10 @@
     "unitsOfMeasure": {
       "type": "jsonObject",
       "view": "treo-core:views/settings/fields/unit-configuration"
+    },
+    "cronPhpVersion": {
+      "type": "varchar",
+      "tooltip": true
     }
   }
 }
