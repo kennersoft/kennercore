@@ -66,6 +66,7 @@ Espo.define('treo-core:views/search/filter', 'views/search/filter', function (De
                         name: this.generalName,
                     },
                     searchParams: this.options.params,
+                    extended: this.options.extended
                 });
             }
         }
