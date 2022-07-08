@@ -14930,7 +14930,7 @@ blockquote {
 }
 
 .form-group.hidden-cell {
-    margin-bottom: 0
+    display: none !important
 }
 
 .hidden-cell div.field {
