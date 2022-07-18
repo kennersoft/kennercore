@@ -294,11 +294,6 @@ Espo.define('views/detail', 'views/main', function (Dep) {
                 dataBoolFilterList = data.boolFilterList.split(',');
             }
 
-            dataBoolFilterList = dataBoolFilterList || [];
-            $.each(dataBoolFilterList, function (key, name) {
-                dataBoolFilterList[key] = name.replace('{{id}}', self.model.id);
-            });
-
             var boolFilterList = dataBoolFilterList || Espo.Utils.cloneDeep(this.selectBoolFilterLists[link] || []);
 
             if (typeof boolFilterList == 'function') {
