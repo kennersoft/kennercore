@@ -302,9 +302,9 @@ Espo.define('views/fields/attachment-multiple', 'views/fields/base', function (D
                 case 'image/gif':
                 case 'image/svg+xml':
                     const src = this.getImageUrl(id, 'small');
-                    const maxWidth = (this.imageSizes[this.previewSize] || {})[0] + 'px';
-                    const maxHeight = (this.imageSizes[this.previewSize] || {})[1] + 'px';
-                    preview = `<img src="${src}" title="${name}" style="max-width: ${maxWidth}; max-height: ${maxHeight}">`;
+                    const width = (this.imageSizes[this.previewSize] || {})[0] + 'px';
+                    const height = (this.imageSizes[this.previewSize] || {})[1] + 'px';
+                    preview = `<img src="${src}" title="${name}" style="width: ${width}; height: ${height}">`;
             }
 
             return preview;
@@ -522,11 +522,11 @@ Espo.define('views/fields/attachment-multiple', 'views/fields/base', function (D
             var preview = name;
             if (this.isTypeIsImage(type)) {
                 const src = this.getImageUrl(id, this.previewSize);
-                const maxWidth = (this.imageSizes[this.previewSize] || {})[0] + 'px';
-                const maxHeight = (this.imageSizes[this.previewSize] || {})[1] + 'px';
+                const width = (this.imageSizes[this.previewSize] || {})[0] + 'px';
+                const height = (this.imageSizes[this.previewSize] || {})[1] + 'px';
                 preview = `
                         <a data-action="showImagePreview" data-id="${id}" href="${this.getImageUrl(id)}">
-                            <img src="${src}" class="image-preview" style="max-width: ${maxWidth}; max-height: ${maxHeight}">
+                            <img src="${src}" class="image-preview" style="width: ${width}; height: ${height}">
                         </a>`;
             }
             return preview;
