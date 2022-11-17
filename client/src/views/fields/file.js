@@ -55,6 +55,7 @@ Espo.define('views/fields/file', 'views/fields/link', function (Dep) {
             'image/jpeg',
             'image/png',
             'image/gif',
+            'image/svg+xml'
         ],
 
         defaultType: false,
@@ -78,16 +79,6 @@ Espo.define('views/fields/file', 'views/fields/link', function (Dep) {
                     this.uploadFile(files[0]);
                     $file.replaceWith($file.clone(true));
                 }
-            },
-            'click a[data-action="showImagePreview"]': function (e) {
-                var id = $(e.currentTarget).data('id');
-                this.createView('preview', 'views/modals/image-preview', {
-                    id: id,
-                    model: this.model,
-                    name: this.nameHash[id]
-                }, function (view) {
-                    view.render();
-                });
             },
             'click a[data-action="showImagePreview"]': function (e) {
                 e.preventDefault();
@@ -163,6 +154,8 @@ Espo.define('views/fields/file', 'views/fields/link', function (Dep) {
             this.foreignScope = 'Attachment';
 
             this.previewSize = this.options.previewSize || this.params.previewSize || this.previewSize;
+
+            this.imageSizes = this.getMetadata().get(['app', 'imageSizes']) || {};
 
             var sourceDefs = this.getMetadata().get(['clientDefs', 'Attachment', 'sourceDefs']) || {};
 
@@ -260,7 +253,14 @@ Espo.define('views/fields/file', 'views/fields/link', function (Dep) {
                 case 'image/png':
                 case 'image/jpeg':
                 case 'image/gif':
-                    preview = '<a data-action="showImagePreview" data-id="' + id + '" href="' + this.getImageUrl(id) + '"><img src="'+this.getBasePath()+'?entryPoint=image&size='+this.previewSize+'&id=' + id + '" class="image-preview"></a>';
+                case 'image/svg+xml':
+                    const src = this.getBasePath() + '?entryPoint=image&size=' + this.previewSize + '&id=' + id;
+                    const maxWidth = (this.imageSizes[this.previewSize] || {})[0] + 'px';
+                    const maxHeight = (this.imageSizes[this.previewSize] || {})[1] + 'px';
+                    preview = `
+                        <a data-action="showImagePreview" data-id="${id}" href="${this.getImageUrl(id)}">
+                            <img src="${src}" class="image-preview" style="max-width: ${maxWidth}; max-height: ${maxHeight}">
+                        </a>`;
             }
             return preview;
         },
@@ -273,7 +273,11 @@ Espo.define('views/fields/file', 'views/fields/link', function (Dep) {
                 case 'image/png':
                 case 'image/jpeg':
                 case 'image/gif':
-                    preview = '<img src="' + this.getImageUrl(id, 'small') + '" title="' + name + '">';
+                case 'image/svg+xml':
+                    const src = this.getImageUrl(id, 'small');
+                    const maxWidth = (this.imageSizes[this.previewSize] || {})[0] + 'px';
+                    const maxHeight = (this.imageSizes[this.previewSize] || {})[1] + 'px';
+                    preview = `<img src="${src}" title="${name}" style="max-width: ${maxWidth}; max-height: ${maxHeight}">`;
             }
 
             return preview;
