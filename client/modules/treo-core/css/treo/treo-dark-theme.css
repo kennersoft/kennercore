@@ -21173,6 +21173,71 @@ select {
     background-color: white;
 }
 
+.multilang-tabs {
+    border-bottom: 1px solid #dcdcdc;
+    border-top: 1px solid #dcdcdc;
+    display: flex;
+    justify-content: space-between;
+    height: 29px;
+}
+.multilang-tabs .locale-tab {
+    margin-top: -1px;
+    margin-bottom: -1px;
+    text-align: center;
+    align-items: center;
+    border-top: 1px solid #ececec;
+}
+.multilang-tabs .locale-tab:hover {
+    background-color: #66afe999;
+}
+.multilang-tabs .locale-tab a {
+    display: inline-block;
+    padding: 3px 10px;
+    width: 100%;
+    color: #555;
+}
+.multilang-tabs .locale-tab a:hover {
+    text-decoration: none;
+}
+.multilang-tabs .locale-tab.active {
+    background-color: #66afe999;
+    border-bottom: 0;
+    cursor: default;
+}
+.multilang-tabs .locale-tab.active a {
+    font-weight: 600;
+}
+
+.cell.modded-field {
+    padding: 8px 8px 0;
+}
+.cell.modded-field.selected-mode {
+     background-color: #66afe94c;
+}
+.cell.modded-field .state-label,
+.cell.modded-field .copy-to-manual-link {
+    padding: 0 6px;
+    border-radius: 4px;
+    border: 1px solid #ececec;
+    cursor: pointer;
+}
+.cell.modded-field .state-label:hover,
+.cell.modded-field .copy-to-manual-link:hover {
+    background-color: #2895ea;
+    border-color: #2895ea;
+    color: #fff;
+}
+.cell.modded-field.selected-mode .state-label,
+.cell.modded-field.selected-mode .copy-to-manual-link {
+    cursor: default;
+    background-color: #2895ea;
+    border-color: #2895ea;
+    color: #fff;
+}
+.cell.modded-field.selected-mode .copy-to-manual-link {
+    cursor: pointer;
+}
+
 @media screen and (max-width: 767px) {
     html, body {
         height: 100%;
