@@ -21187,36 +21187,45 @@ select {
     align-items: center;
     border-top: 1px solid #ececec;
 }
-.multilang-tabs .locale-tab:hover {
-    background-color: #66afe999;
-}
 .multilang-tabs .locale-tab a {
     display: inline-block;
-    padding: 3px 10px;
+    margin: 0;
+    border: 0;
+    padding: 4px 10px;
     width: 100%;
     color: #555;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 .multilang-tabs .locale-tab a:hover {
     text-decoration: none;
 }
-.multilang-tabs .locale-tab.active {
+.multilang-tabs .locale-tab a:hover,
+.multilang-tabs .locale-tab a:active {
     background-color: #66afe999;
     border-bottom: 0;
+}
+.multilang-tabs .locale-tab.active {
     cursor: default;
 }
-.multilang-tabs .locale-tab.active a {
+.multilang-tabs .locale-tab.active a,
+.multilang-tabs .locale-tab.active a:focus,
+.multilang-tabs .locale-tab.active a:hover {
+    background-color: #66afe999;
+    border: 0;
+    cursor: default;
     font-weight: 600;
 }
-
 .cell.modded-field {
-    padding: 8px 8px 0;
+    padding: 8px;
 }
 .cell.modded-field.selected-mode {
      background-color: #66afe94c;
 }
 .cell.modded-field .state-label,
 .cell.modded-field .copy-to-manual-link {
-    padding: 0 6px;
+    padding: 2px 6px;
     border-radius: 4px;
     border: 1px solid #ececec;
     cursor: pointer;
