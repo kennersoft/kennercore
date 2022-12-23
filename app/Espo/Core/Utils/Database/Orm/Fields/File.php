@@ -53,6 +53,9 @@ class File extends Base
                     ),
                     $fieldName.'Name' => array(
                         'type' => 'foreign'
+                    ),
+                    $fieldName.'Type' => array(
+                        'type' => 'foreign'
                     )
                 )
             ),
@@ -74,6 +77,8 @@ class File extends Base
         if (empty($fieldParams['notStorable'])) {
             $data[$entityName]['fields'][$fieldName . 'Name']['relation'] = $fieldName;
             $data[$entityName]['fields'][$fieldName . 'Name']['foreign'] = 'name';
+            $data[$entityName]['fields'][$fieldName . 'Type']['relation'] = $fieldName;
+            $data[$entityName]['fields'][$fieldName . 'Type']['foreign'] = 'type';
 
             $linkName = $fieldName;
             $data[$entityName]['relations'] = array();
