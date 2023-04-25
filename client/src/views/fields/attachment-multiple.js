@@ -65,7 +65,8 @@ Espo.define('views/fields/attachment-multiple', 'views/fields/base', function (D
             'image/jpeg',
             'image/png',
             'image/gif',
-            'image/svg+xml'
+            'image/svg+xml',
+            'image/webp'
         ],
 
         validations: ['ready', 'required'],
@@ -304,6 +305,7 @@ Espo.define('views/fields/attachment-multiple', 'views/fields/base', function (D
                 case 'image/png':
                 case 'image/jpeg':
                 case 'image/gif':
+                case 'image/webp':
                     preview = `<img src="${src}" title="${name}" style="max-width: ${width}; max-height: ${height}">`;
                     break;
                 case 'image/svg+xml':
@@ -514,6 +516,7 @@ Espo.define('views/fields/attachment-multiple', 'views/fields/base', function (D
                 case 'image/png':
                 case 'image/jpeg':
                 case 'image/gif':
+                case 'image/webp':
                 case 'image/svg+xml':
                     return true;
             }

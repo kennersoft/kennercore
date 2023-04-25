@@ -57,7 +57,7 @@ class Image extends AbstractEntryPoint
     /**
      * @var array
      */
-    protected $allowedFileTypes = ['image/jpeg', 'image/png', 'image/gif', 'image/svg+xml'];
+    protected $allowedFileTypes = ['image/jpeg', 'image/png', 'image/gif', 'image/svg+xml', 'image/webp'];
 
     /**
      * @throws BadRequest
@@ -286,6 +286,21 @@ class Image extends AbstractEntryPoint
                     $originalHeight
                 );
                 break;
+            case 'image/webp':
+                $sourceImage = imagecreatefromwebp($filePath);
+                imagecopyresampled(
+                    $targetImage,
+                    $sourceImage,
+                    0,
+                    0,
+                    0,
+                    0,
+                    $targetWidth,
+                    $targetHeight,
+                    $originalWidth,
+                    $originalHeight
+                );
+                break;
         }
 
         if (function_exists('exif_read_data')) {
@@ -307,6 +322,9 @@ class Image extends AbstractEntryPoint
                 break;
             case 'image/gif':
                 imagegif($targetImage);
+                break;
+            case 'image/webp':
+                imagewebp($targetImage);
                 break;
         }
         $contents = ob_get_contents();
