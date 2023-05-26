@@ -116,6 +116,9 @@
   "views/fields/array": [
     "treo-core"
   ],
+  "views/fields/array-int": [
+    "treo-core"
+  ],
   "views/fields/base": [
     "treo-core"
   ],

@@ -65,6 +65,8 @@ Espo.define('views/fields/attachment-multiple', 'views/fields/base', function (D
             'image/jpeg',
             'image/png',
             'image/gif',
+            'image/svg+xml',
+            'image/webp'
         ],
 
         validations: ['ready', 'required'],
@@ -167,6 +169,8 @@ Espo.define('views/fields/attachment-multiple', 'views/fields/base', function (D
             this.foreignScope = 'Attachment';
 
             this.previewSize = this.options.previewSize || this.params.previewSize || this.previewSize;
+
+            this.imageSizes = this.getMetadata().get(['app', 'imageSizes']) || {};
 
             var self = this;
 
@@ -293,11 +297,20 @@ Espo.define('views/fields/attachment-multiple', 'views/fields/base', function (D
 
             var preview = name;
 
+            const src = this.getImageUrl(id, 'small');
+            const width = (this.imageSizes[this.previewSize] || {})[0] + 'px';
+            const height = (this.imageSizes[this.previewSize] || {})[1] + 'px';
+
             switch (type) {
                 case 'image/png':
                 case 'image/jpeg':
                 case 'image/gif':
-                    preview = '<img src="' + this.getImageUrl(id, 'small') + '" title="' + name + '">';
+                case 'image/webp':
+                    preview = `<img src="${src}" title="${name}" style="max-width: ${width}; max-height: ${height}">`;
+                    break;
+                case 'image/svg+xml':
+                    preview = `<img src="${src}" title="${name}" style="width: ${width}; height: ${height}">`;
+                    break;
             }
 
             return preview;
@@ -503,6 +516,8 @@ Espo.define('views/fields/attachment-multiple', 'views/fields/base', function (D
                 case 'image/png':
                 case 'image/jpeg':
                 case 'image/gif':
+                case 'image/webp':
+                case 'image/svg+xml':
                     return true;
             }
             return false
@@ -513,7 +528,19 @@ Espo.define('views/fields/attachment-multiple', 'views/fields/base', function (D
 
             var preview = name;
             if (this.isTypeIsImage(type)) {
-                preview = '<a data-action="showImagePreview" data-id="' + id + '" href="' + this.getImageUrl(id) + '"><img src="'+this.getImageUrl(id, this.previewSize)+'" class="image-preview"></a>';
+                const src = this.getImageUrl(id, this.previewSize);
+                const width = (this.imageSizes[this.previewSize] || {})[0] + 'px';
+                const height = (this.imageSizes[this.previewSize] || {})[1] + 'px';
+                preview = `
+                        <a data-action="showImagePreview" data-id="${id}" href="${this.getImageUrl(id)}">
+                            <img src="${src}" class="image-preview" style="max-width: ${width}; max-height: ${height}">
+                        </a>`;
+                if (type === 'image/svg+xml') {
+                    preview = `
+                        <a data-action="showImagePreview" data-id="${id}" href="${this.getImageUrl(id)}">
+                            <img src="${src}" class="image-preview" style="width: ${width}; height: ${height}">
+                        </a>`;
+                }
             }
             return preview;
         },

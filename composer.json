@@ -29,7 +29,8 @@
     "zbateson/mail-mime-parser": "~0.4.8",
     "phpoffice/phpspreadsheet": "~1.8.0",
     "symfony/event-dispatcher": "~4.3.0",
-    "symfony/workflow": "~4.3.0"
+    "symfony/workflow": "~4.3.0",
+    "guzzlehttp/psr7": "^1.6"
   },
   "autoload": {
     "psr-0": {

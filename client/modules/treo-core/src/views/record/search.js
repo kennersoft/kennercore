@@ -301,12 +301,16 @@ Espo.define('treo-core:views/record/search', 'class-replace!treo-core:views/reco
                 }
             }
 
-            this.createView('filter-' + name, 'treo-core:views/search/filter', {
+            const options = {
                 name: name,
                 model: this.model,
                 params: params,
                 el: this.options.el + ' .filter[data-name="' + name + '"]'
-            }, function (view) {
+            };
+
+            this.modifyFilterOptions(options);
+
+            this.createView('filter-' + name, 'treo-core:views/search/filter', options, function (view) {
                 if (typeof callback === 'function') {
                     view.once('after:render', function () {
                         callback(view);
@@ -317,6 +321,8 @@ Espo.define('treo-core:views/record/search', 'class-replace!treo-core:views/reco
                 }
             }.bind(this));
         },
+
+        modifyFilterOptions(options) {},
 
         getAdvancedDefs: function () {
             var defs = [];

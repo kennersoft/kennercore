@@ -45,6 +45,7 @@ use Espo\Core\Exceptions\NotFound;
 use Treo\Core\EntryPoints\AbstractEntryPoint;
 use Treo\Core\FileStorage\Storages\UploadDir;
 use Treo\Entities\Attachment;
+use GuzzleHttp\Psr7\Stream;
 
 /**
  * Class Image
@@ -56,7 +57,7 @@ class Image extends AbstractEntryPoint
     /**
      * @var array
      */
-    protected $allowedFileTypes = ['image/jpeg', 'image/png', 'image/gif'];
+    protected $allowedFileTypes = ['image/jpeg', 'image/png', 'image/gif', 'image/svg+xml', 'image/webp'];
 
     /**
      * @throws BadRequest
@@ -153,7 +154,17 @@ class Image extends AbstractEntryPoint
         $thumbFilePath = $this->getThumbPath($attachment, $size);
 
         if (!file_exists($thumbFilePath)) {
-            $contents = $this->getThumbImage($filePath, $fileType, $size);
+            if ($fileType == 'image/svg+xml') {
+                $resource = fopen($filePath, 'r');
+
+                if ($resource === false) {
+                    throw new Error("Could not open '{$filePath}'.");
+                }
+
+                $contents = new Stream($resource);
+            } else {
+                $contents = $this->getThumbImage($filePath, $fileType, $size);
+            }
 
             if (!$this->isTmp($attachment)) {
                 $this->getContainer()->get('fileManager')->putContents($thumbFilePath, $contents);
@@ -275,6 +286,21 @@ class Image extends AbstractEntryPoint
                     $originalHeight
                 );
                 break;
+            case 'image/webp':
+                $sourceImage = imagecreatefromwebp($filePath);
+                imagecopyresampled(
+                    $targetImage,
+                    $sourceImage,
+                    0,
+                    0,
+                    0,
+                    0,
+                    $targetWidth,
+                    $targetHeight,
+                    $originalWidth,
+                    $originalHeight
+                );
+                break;
         }
 
         if (function_exists('exif_read_data')) {
@@ -296,6 +322,9 @@ class Image extends AbstractEntryPoint
                 break;
             case 'image/gif':
                 imagegif($targetImage);
+                break;
+            case 'image/webp':
+                imagewebp($targetImage);
                 break;
         }
         $contents = ob_get_contents();

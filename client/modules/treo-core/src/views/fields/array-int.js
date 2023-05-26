@@ -13,8 +13,8 @@
  * Copyright (C) 2020 Kenner Soft Service GmbH
  * Website: https://kennersoft.de
  *
- * KennerCore as well as TreoCore and EspoCRM is free software: 
- * you can redistribute it and/or modify it under the terms of 
+ * KennerCore as well as TreoCore and EspoCRM is free software:
+ * you can redistribute it and/or modify it under the terms of
  * the GNU General Public License as published by the Free Software Foundation,
  * either version 3 of the License, or (at your option) any later version.
  *
@@ -35,40 +35,20 @@
  * the "KennerCore", "EspoCRM" and "TreoCore" words.
  */
 
-Espo.define('treo-core:views/search/filter', 'views/search/filter', function (Dep) {
+Espo.define('treo-core:views/fields/array-int', 'class-replace!treo-core:views/fields/array-int',
+    Dep => Dep.extend({
 
-    return Dep.extend({
-
-        template: 'treo-core:search/filter',
-
-        data: function () {
-            return {
-                generalName: this.generalName,
-                name: this.name,
-                scope: this.model.name,
-                notRemovable: this.options.notRemovable
-            };
-        },
-
-        setup: function () {
-            var newName = this.name = this.options.name;
-            this.generalName = newName.split('-')[0];
-            var type = this.model.getFieldType(this.generalName);
-
-            if (type) {
-                var viewName = this.model.getFieldParam(this.generalName, 'view') || this.getFieldManager().getViewName(type);
-
-                this.createView('field', viewName, {
-                    mode: 'search',
-                    model: this.model,
-                    el: this.options.el + ' .field',
-                    defs: {
-                        name: this.generalName,
-                    },
-                    searchParams: this.options.params,
-                    extended: this.options.extended
-                });
+        removeValue(value) {
+            value = parseInt(value);
+            if (isNaN(value)) {
+                return;
             }
+
+            this.$list.children(`[data-value="${value}"]`).remove();
+            let index = this.selected.indexOf(value);
+            this.selected.splice(index, 1);
+            this.trigger('change');
         }
-    });
-});
+
+    })
+);

@@ -439,9 +439,10 @@ class Record extends \Espo\Core\Services\Base
     {
         $hasCompleteness = !empty($this->getMetadata()->get("scopes.{$entity->getEntityType()}.hasCompleteness"))
             && !empty($this->getMetadata()->get("app.additionalEntityParams.hasCompleteness"));
+        $hasMultilangTabs = !empty($this->getConfig()->get('isMultilangTabs'));
         foreach ($entity->getAttributes() as $field => $data) {
             if (!$hasCompleteness && (!empty($data['required']) || $this->isRequiredField($field, $entity, 'required'))
-                && $this->isNullField($entity, $field)) {
+                && $this->isNullField($entity, $field) && !$hasMultilangTabs) {
                 throw new BadRequest("Validation failed. '$field' is required");
             }
         }
