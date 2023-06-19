@@ -235,9 +235,15 @@ class QueueManager
             return false;
         }
 
+        $user = $item->get('createdBy');
+        if ($user && $user->id == 'system') {
+            $user->set('isAdmin', true);
+            $user->set('ipAddress', $_SERVER['REMOTE_ADDR']);
+        }
+
         // auth
-        $this->getContainer()->setUser($item->get('createdBy'));
-        $this->getEntityManager()->setUser($item->get('createdBy'));
+        $this->getContainer()->setUser($user);
+        $this->getEntityManager()->setUser($user);
 
         // running
         $this->setStatus($item, 'Running');
