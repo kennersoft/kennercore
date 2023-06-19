@@ -83,7 +83,7 @@ Espo.define('treo-core:views/queue-manager/panel', 'view', function (Dep) {
                 this.collection.maxSize = 200;
                 this.collection.url = 'QueueItem';
                 this.collection.sortBy = 'sortOrder';
-                this.collection.asc = true;
+                this.collection.asc = false;
                 this.collection.where = this.getWhere();
                 this.collection.whereAdditional = this.getWhereAdditional();
 
@@ -114,7 +114,8 @@ Espo.define('treo-core:views/queue-manager/panel', 'view', function (Dep) {
                     rowActionsDisabled: true,
                     checkboxes: false,
                     headerDisabled: true,
-                    layoutName: 'listInQueueManager'
+                    layoutName: 'listInQueueManager',
+                    showMore: false
                 }, function (view) {
                     view.render();
                 });
