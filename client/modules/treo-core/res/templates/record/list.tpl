@@ -64,7 +64,7 @@
                             {{#if this.hasCustomLabel}}
                                 {{this.customLabel}}
                             {{else}}
-                                {{translate this.name scope=../../../collection.name category='fields'}}
+                                {{translate this.name scope=../../../../collection.name category='fields'}}
                             {{/if}}
                         </a>
                         {{#if this.sorted}}
@@ -78,7 +78,7 @@
                         {{#if this.hasCustomLabel}}
                             {{this.customLabel}}
                         {{else}}
-                            {{translate this.name scope=../../../collection.name category='fields'}}
+                            {{translate this.name scope=../../../../collection.name category='fields'}}
                         {{/if}}
                     {{/if}}
                 {{/unless}}
@@ -112,13 +112,13 @@
                 <th {{#if width}} width="{{width}}"{{/if}}{{#if align}} style="text-align: {{align}};"{{/if}}>
                 {{#unless this.noLabel}}
                     {{#if this.sortable}}
-                        <a href="javascript:" class="sort" data-name="{{this.name}}">{{#if this.hasCustomLabel}}{{this.customLabel}}{{else}}{{translate this.name scope=../../../collection.name category='fields'}}{{/if}}</a>
+                        <a href="javascript:" class="sort" data-name="{{this.name}}">{{#if this.hasCustomLabel}}{{this.customLabel}}{{else}}{{translate this.name scope=../../../../collection.name category='fields'}}{{/if}}</a>
                         {{#if this.sorted}}{{#if this.asc}}<span class="caret"></span>{{else}}<span class="caret-up"></span>{{/if}}{{/if}}
                     {{else}}
                         {{#if this.hasCustomLabel}}
                             {{this.customLabel}}
                         {{else}}
-                            {{translate this.name scope=../../../collection.name category='fields'}}
+                            {{translate this.name scope=../../../../collection.name category='fields'}}
                         {{/if}}
                     {{/if}}
                 {{/unless}}
