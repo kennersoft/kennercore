@@ -203,6 +203,9 @@
   "views/admin/layouts/base": [
     "treo-core"
   ],
+  "views/admin/layouts/list": [
+    "treo-core"
+  ],
   "views/admin/integrations/index": [
     "treo-core"
   ],

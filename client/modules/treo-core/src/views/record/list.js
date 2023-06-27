@@ -401,10 +401,14 @@ Espo.define('treo-core:views/record/list', 'class-replace!treo-core:views/record
 
         _getHeaderDefs() {
             let defs = Dep.prototype._getHeaderDefs.call(this);
+
             let model = this.collection.model.prototype;
-            defs.forEach(item => {
+            defs.forEach((item, i) => {
                 if (item.name && ['currency', 'wysiwyg', 'wysiwygMultiLang'].includes(model.getFieldType(item.name))) {
                     item.sortable = false;
+                }
+                if (this.listLayout[i] && this.listLayout[i].noLabel) {
+                    item.noLabel = true;
                 }
             });
             return defs;
