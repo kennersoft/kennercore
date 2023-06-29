@@ -38,10 +38,11 @@
 Espo.define('treo-core:views/admin/layouts/list', 'class-replace!treo-core:views/admin/layouts/list',
     Dep => Dep.extend({
 
+        dataAttributeList: _.union(Dep.prototype.dataAttributeList, ['noLabel']),
+
         dataAttributesDefs: _.extend(Dep.prototype.dataAttributesDefs, {
             noLabel: {
-                type: 'bool',
-                readOnly: true
+                type: 'bool'
             }
         })
 
