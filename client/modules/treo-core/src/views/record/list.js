@@ -407,7 +407,7 @@ Espo.define('treo-core:views/record/list', 'class-replace!treo-core:views/record
                 if (item.name && ['currency', 'wysiwyg', 'wysiwygMultiLang'].includes(model.getFieldType(item.name))) {
                     item.sortable = false;
                 }
-                if (this.listLayout[i] && this.listLayout[i].noLabel) {
+                if (this.listLayout && this.listLayout[i] && this.listLayout[i].noLabel) {
                     item.noLabel = true;
                 }
             });
