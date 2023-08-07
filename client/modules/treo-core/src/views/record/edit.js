@@ -39,8 +39,33 @@ Espo.define('treo-core:views/record/edit', 'class-replace!treo-core:views/record
 
     return Dep.extend({
 
-        template: 'treo-core:record/edit'
+        template: 'treo-core:record/edit',
+
+        cancel: function () {
+            if (this.isChanged) {
+                this.model.set(this.attributes);
+            }
+            this.setIsNotChanged();
+            if (this.model.get('_duplicatingEntityId')) {
+                this.exit('duplicate');
+            } else {
+                this.exit('cancel');
+            }
+        },
+
+        exitAfterDuplicate: function () {
+            var id = this.model.get('_duplicatingEntityId');
+            if (id) {
+                var url = '#' + this.scope + '/view/' + id;
+
+                this.getRouter().navigate(url, {trigger: false});
+                this.getRouter().dispatch(this.scope, 'view', {
+                    id: id,
+                    rootUrl: this.options.rootUrl
+                });
+                return true;
+            }
+        }
 
     });
-
 });
