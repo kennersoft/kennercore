@@ -90,6 +90,29 @@ Espo.define('treo-core:views/admin/field-manager/fields/options', ['class-replac
             this.selected = selected;
         },
 
+        afterRender: function () {
+            Dep.prototype.afterRender.call(this);
+
+            if (this.mode === 'edit') {
+                if (!this.params.options) {
+                    this.$select.off('keypress');
+                    this.$select.on('keypress', function (e) {
+                        if (e.keyCode === 13) {
+                            let value = this.$select.val().toString();
+                            if (this.noEmptyString) {
+                                if (value === '') {
+                                    return;
+                                }
+                            }
+                            value = value.trim();
+                            this.addValue(value);
+                            this.$select.val('');
+                        }
+                    }.bind(this));
+                }
+            }
+        }
+
     });
 
 });
