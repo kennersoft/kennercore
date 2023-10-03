@@ -19833,6 +19833,8 @@ button.category:focus {
         padding: 0;
         position: relative;
         border-top: 1px solid #dcdcdc;
+        word-break: break-word;
+        overflow: hidden;
     }
 
     .modal-dialog .edit > .row > .side,

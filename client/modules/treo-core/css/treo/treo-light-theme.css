@@ -19146,6 +19146,8 @@ button.category:focus {
     position: relative;
     margin-left: 1px;
     margin-right: -1px;
+    word-break: break-word;
+    overflow: hidden;
   }
   .nav > li > a {
     padding: 7px 15px;
