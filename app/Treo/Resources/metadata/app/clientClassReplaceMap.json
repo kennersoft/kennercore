@@ -74,6 +74,9 @@
   "views/record/edit": [
     "treo-core"
   ],
+  "views/record/edit-bottom": [
+    "treo-core"
+  ],
   "views/record/edit-side": [
     "treo-core"
   ],
