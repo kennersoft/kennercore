@@ -52,6 +52,10 @@ Espo.define('treo-core:views/fields/wysiwyg', 'class-replace!treo-core:views/fie
             'click a[data-action="seeMoreText"]': function (e) {
                 this.showMoreText = true;
                 this.reRender();
+            },
+            'click a[data-action="seeLessText"]': function (e) {
+                this.showMoreText = false;
+                this.reRender();
             }
         },
 
@@ -86,8 +90,12 @@ Espo.define('treo-core:views/fields/wysiwyg', 'class-replace!treo-core:views/fie
             Dep.prototype.afterRender.call(this);
 
             if (this.mode === 'detail' || this.mode === 'list') {
-                if ((!this.model.has('isHtml') || this.model.get('isHtml')) && !this.showMoreText && !this.showMoreDisabled) {
-                    this.applyFieldPartHiding(this.name);
+                if ((!this.model.has('isHtml') || this.model.get('isHtml')) && !this.showMoreDisabled) {
+                    if (!this.showMoreText) {
+                        this.applyFieldPartMore(this.name);
+                    } else {
+                        this.applyFieldPartLess(this.name);
+                    }
                 }
             }
         },
@@ -116,23 +124,39 @@ Espo.define('treo-core:views/fields/wysiwyg', 'class-replace!treo-core:views/fie
             }
 
             if (this.mode === 'list' || (this.mode === 'detail' && (this.model.has('isHtml') && !this.model.get('isHtml')))) {
-                if (text && !this.showMoreText && !this.showMoreDisabled) {
-                    let isCut = false;
+                if (text && !this.showMoreDisabled) {
+                    if (!this.showMoreText) {
+                        let isCut = false;
 
-                    if (text.length > this.detailMaxLength) {
-                        text = text.substr(0, this.detailMaxLength);
-                        isCut = true;
-                    }
+                        if (text.length > this.detailMaxLength) {
+                            text = text.substr(0, this.detailMaxLength);
+                            isCut = true;
+                        }
 
-                    let nlCount = (text.match(/\n/g) || []).length;
-                    if (nlCount > this.detailMaxNewLineCount) {
-                        let a = text.split('\n').slice(0, this.detailMaxNewLineCount);
-                        text = a.join('\n');
-                        isCut = true;
-                    }
+                        let nlCount = (text.match(/\n/g) || []).length;
+                        if (nlCount > this.detailMaxNewLineCount) {
+                            let a = text.split('\n').slice(0, this.detailMaxNewLineCount);
+                            text = a.join('\n');
+                            isCut = true;
+                        }
 
-                    if (isCut) {
-                        text += ' ...\n[#see-more-text]';
+                        if (isCut) {
+                            text += ' ...\n[#see-more-text]';
+                        }
+                    } else {
+                        let extraText = false;
+                        let cutText = text;
+                        if (text.length > this.detailMaxLength) {
+                            cutText = text.substr(0, this.detailMaxLength);
+                            extraText = true;
+                        }
+                        let nlCount = (cutText.match(/\n/g) || []).length;
+                        if (nlCount > this.detailMaxNewLineCount) {
+                            extraText = true;
+                        }
+                        if (extraText) {
+                            text += ' \n[#see-less-text]';
+                        }
                     }
                 }
             }
@@ -150,13 +174,23 @@ Espo.define('treo-core:views/fields/wysiwyg', 'class-replace!treo-core:views/fie
             }
         },
 
-        applyFieldPartHiding(name) {
+        applyFieldPartMore(name) {
             let showMore = $(`<a href="javascript:" data-action="seeMoreText" data-name="${name}">${this.getLanguage().translate('See more')}</a>`);
             if (!this.useIframe) {
                 let htmlContainer = this.$el.find(`.html-container[data-name="${name}"]`);
                 if (htmlContainer.height() > this.detailMaxHeight) {
                     htmlContainer.parent().append(showMore);
                     htmlContainer.css({maxHeight: this.detailMaxHeight + 'px', overflow: 'hidden', marginBottom: '10px'});
+                }
+            }
+        },
+
+        applyFieldPartLess(name) {
+            let showLess = $(`<a href="javascript:" data-action="seeLessText" data-name="${name}">${this.getLanguage().translate('See less')}</a>`);
+            if (!this.useIframe) {
+                let htmlContainer = this.$el.find(`.html-container[data-name="${name}"]`);
+                if (htmlContainer.height() > this.detailMaxHeight) {
+                    htmlContainer.parent().append(showLess);
                 }
             }
         }

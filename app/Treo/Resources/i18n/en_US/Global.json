@@ -172,7 +172,8 @@
     "Core": "Core",
     "Mark all read": "Mark all as read",
     "Ownership Information": "Ownership Information",
-    "New": "New"
+    "New": "New",
+    "See less": "See less"
   },
   "descriptions": {
     "Core": "KennerCore is a software ecosystem, designed for rapid development of web-based responsive business applications."

@@ -13,8 +13,8 @@
  * Copyright (C) 2020 Kenner Soft Service GmbH
  * Website: https://kennersoft.de
  *
- * KennerCore as well as TreoCore and EspoCRM is free software:
- * you can redistribute it and/or modify it under the terms of
+ * KennerCore as well as TreoCore and EspoCRM is free software: 
+ * you can redistribute it and/or modify it under the terms of 
  * the GNU General Public License as published by the Free Software Foundation,
  * either version 3 of the License, or (at your option) any later version.
  *
@@ -35,40 +35,37 @@
  * the "KennerCore", "EspoCRM" and "TreoCore" words.
  */
 
-Espo.define('treo-core:views/fields/text', 'class-replace!treo-core:views/fields/text', function (Dep) {
+Espo.define('treo-core:view-helper', 'view-helper', ViewHelper => {
 
-    return Dep.extend({
+    const registerHandlebarsHelpers = ViewHelper.prototype._registerHandlebarsHelpers;
 
-        searchTypeList: ['contains', 'startsWith', 'equals', 'endsWith', 'like', 'notContains', 'notEquals', 'notLike', 'isEmpty', 'isNotEmpty'],
+    _.extend(ViewHelper.prototype, {
 
-        events: _.extend(Dep.prototype.events, {
-            'click a[data-action="seeLessText"]': function (e) {
-                this.seeMoreText = false;
-                this.reRender();
-            }
-        }),
+        _registerHandlebarsHelpers() {
+            registerHandlebarsHelpers.call(this);
 
-        getValueForDisplay() {
-            let text = Dep.prototype.getValueForDisplay.call(this);
+            Handlebars.unregisterHelper('complexText');
+            Handlebars.registerHelper('complexText', text => {
+                text = text || ''
 
-            if (text && (this.mode === 'detail' || this.mode === 'list') && this.seeMoreText && !this.seeMoreDisabled) {
-                let extraText = false;
-                let cutText = text;
-                if (text.length > this.detailMaxLength) {
-                    cutText = text.substr(0, this.detailMaxLength);
-                    extraText = true;
-                }
-                let nlCount = (cutText.match(/\n/g) || []).length;
-                if (nlCount > this.detailMaxNewLineCount) {
-                    extraText = true;
-                }
-                if (extraText) {
-                    text += ' \n[#see-less-text]';
-                }
-            }
+                text = text.replace(this.urlRegex, '$1[$2]($2)');
 
-            return text || '';
+                text = Handlebars.Utils.escapeExpression(text).replace(/&gt;+/g, '>');
+
+                this.mdBeforeList.forEach(item => {
+                    text = text.replace(item.regex, item.value);
+                });
+
+                text = marked(text);
+
+                text = text.replace('[#see-more-text]', ' <a href="javascript:" data-action="seeMoreText">' + this.language.translate('See more')) + '</a>';
+                text = text.replace('[#see-less-text]', ' <a href="javascript:" data-action="seeLessText">' + this.language.translate('See less')) + '</a>';
+                return new Handlebars.SafeString(text);
+            });
         }
 
-    })
+    });
+
+    return ViewHelper;
+
 });
