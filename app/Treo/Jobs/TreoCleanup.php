@@ -87,6 +87,7 @@ class TreoCleanup extends Base
         $this->cleanupNotifications();
         $this->cleanupImportResults();
         $this->cleanupDeleted();
+        $this->cleanupQueueManager();
         $this->cleanupAttachments();
         $this->cleanupDbSchema();
 
@@ -132,6 +133,14 @@ class TreoCleanup extends Base
                 $this->exec("DELETE FROM {$this->db}.$table WHERE deleted=1 AND DATE(modified_at)<'{$this->date}'");
             }
         }
+    }
+
+    /**
+     * Cleanup scheduled job logs
+     */
+    protected function cleanupQueueManager(): void
+    {
+        $this->exec("DELETE FROM queue_item WHERE DATE(modified_at)<'{$this->date}' AND status IN ('Success','Closed')");
     }
 
     /**

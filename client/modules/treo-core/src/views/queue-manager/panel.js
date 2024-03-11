@@ -80,10 +80,11 @@ Espo.define('treo-core:views/queue-manager/panel', 'view', function (Dep) {
             this.wait(true);
             this.getCollectionFactory().create('QueueItem', collection => {
                 this.collection = collection;
-                this.collection.maxSize = 200;
+                this.collection.maxSize = 50;
                 this.collection.url = 'QueueItem';
                 this.collection.sortBy = 'sortOrder';
                 this.collection.asc = false;
+                this.collection.data.select = 'name,status,createdById,createdByName,sortOrder,createdAt';
                 this.collection.where = this.getWhere();
                 this.collection.whereAdditional = this.getWhereAdditional();
 
