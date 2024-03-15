@@ -15183,7 +15183,9 @@ table.table > thead th > a {
 }
 
 table.table > thead th {
-    color: #999
+    color: #999;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .cell label, .filter label {
