@@ -51,7 +51,11 @@ Espo.define('treo-core:views/main', 'class-replace!treo-core:views/main', functi
                 a.push('<span>' + item + '</span>');
             }, this);
 
-            return '<div class="header-breadcrumbs">' + a.join('<span class="breadcrumb-separator"> &rsaquo; </span>') + '</div>';
+            var fixedHeader = '';
+            if (this.$el.find('.header-breadcrumbs').hasClass('fixed-header-breadcrumbs')) {
+                fixedHeader = 'fixed-header-breadcrumbs';
+            }
+            return '<div class="header-breadcrumbs ' + fixedHeader + '">' + a.join('<span class="breadcrumb-separator"> &rsaquo; </span>') + '</div>';
         },
 
         bindFixedHeaderOnScroll() {
