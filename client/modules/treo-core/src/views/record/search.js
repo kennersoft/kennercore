@@ -414,5 +414,11 @@ Espo.define('treo-core:views/record/search', 'class-replace!treo-core:views/reco
         isLeftDropdown() {
             return Dep.prototype.isLeftDropdown.call(this) || this.getAdvancedDefs().length;
         },
+
+        resetFilters() {
+            this.bool = {};
+
+            Dep.prototype.resetFilters.call(this);
+        }
     });
 });
