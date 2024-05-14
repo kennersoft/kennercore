@@ -182,8 +182,14 @@ class TreoCleanup extends Base
     protected function cleanupImportResults(): void
     {
         $date = (new \DateTime())->modify("-2 week")->format('Y-m-d');
-        $this->exec("DELETE FROM `import_result_log` WHERE import_result_id in (SELECT id FROM import_result WHERE DATE(created_at)<'{$date}')");
-        $this->exec("DELETE FROM `import_result` WHERE DATE(created_at)<'{$date}'");
+        $resultExist = $this->getEntityManager()->nativeQuery("SHOW TABLES LIKE 'import_result_log'")->fetchAll(\PDO::FETCH_COLUMN);
+        if (count($resultExist)) {
+            $this->exec("DELETE FROM `import_result_log` WHERE import_result_id in (SELECT id FROM import_result WHERE DATE(created_at)<'{$date}')");
+        }
+        $resultLogExist = $this->getEntityManager()->nativeQuery("SHOW TABLES LIKE 'import_result'")->fetchAll(\PDO::FETCH_COLUMN);
+        if (count($resultLogExist)) {
+            $this->exec("DELETE FROM `import_result` WHERE DATE(created_at)<'{$date}'");
+        }
     }
 
     /**
