@@ -169,6 +169,21 @@ Espo.define('treo-core:views/record/search', 'class-replace!treo-core:views/reco
             this.collection.fetch();
         },
 
+        updateSearch() {
+            Dep.prototype.updateSearch.call(this);
+
+            const boolData = {};
+            for (let item in this.bool) {
+                if (item in this.boolFilterData) {
+                    boolData[item] = this.boolFilterData[item];
+                }
+            }
+            const searchData = this.searchManager.get();
+            this.searchManager.set(_.extend(searchData, {
+                boolData: boolData
+            }));
+        },
+
         sortAdvanced: function (advanced) {
             var result = {};
             Object.keys(advanced).sort(function (item1, item2) {
