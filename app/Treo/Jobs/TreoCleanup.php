@@ -140,7 +140,8 @@ class TreoCleanup extends Base
      */
     protected function cleanupQueueManager(): void
     {
-        $this->exec("DELETE FROM queue_item WHERE DATE(modified_at)<'{$this->date}' AND status IN ('Success','Closed')");
+        $date = (new \DateTime())->modify("-1 month")->format('Y-m-d');
+        $this->exec("DELETE FROM queue_item WHERE DATE(modified_at)<'{$date}' AND status IN ('Success','Closed')");
     }
 
     /**
