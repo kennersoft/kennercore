@@ -218,7 +218,12 @@ Espo.define('treo-core:views/record/search', 'class-replace!treo-core:views/reco
                 id: id,
                 name: id,
                 label: name,
-                data: Espo.Utils.cloneDeep(this.advanced),
+                data: {
+                    textFilter: Espo.Utils.cloneDeep(this.textFilter),
+                    advanced: Espo.Utils.cloneDeep(this.advanced),
+                    bool: Espo.Utils.cloneDeep(this.bool),
+                    boolFilterData: Espo.Utils.cloneDeep(this.boolFilterData)
+                },
                 primary: this.primary
             };
 
@@ -236,6 +241,77 @@ Espo.define('treo-core:views/record/search', 'class-replace!treo-core:views/reco
             }, {patch: true});
 
             this.presetName = id;
+        },
+
+        selectPreset(presetName, forceClearAdvancedFilters) {
+            const wasPreset = !(this.primary === this.presetName);
+
+            this.presetName = presetName;
+
+            const data = this.getPresetData();
+            const textFilter = data.textFilter || '';
+            const advanced = data.advanced || {};
+            const bool = data.bool || {};
+            const boolFilterData = data.boolFilterData || {};
+            this.primary = this.getPrimaryFilterName();
+
+            const isPreset = !(this.primary === this.presetName);
+
+            const isActiveBool = Object.values(bool).some(i => i);
+            if (forceClearAdvancedFilters || wasPreset || isPreset
+                || textFilter || Object.keys(advanced).length || isActiveBool
+            ) {
+                this.removeFilters();
+                this.textFilter = textFilter;
+                this.advanced = advanced;
+                this.bool = bool;
+                this.boolFilterData = boolFilterData;
+            }
+
+            this.updateSearch();
+            this.manageLabels();
+
+            this.createFilters(() => this.render());
+            this.updateCollection();
+        },
+
+        removePreset(id) {
+            const presetFilters = this.getPreferences().get('presetFilters') || {};
+            if (!(this.scope in presetFilters)) {
+                presetFilters[this.scope] = [];
+            }
+
+            let list;
+            list = presetFilters[this.scope];
+            list.forEach((item, i) => {
+                if (item.id === id) {
+                    list.splice(i, 1);
+                }
+            });
+
+            list = this.presetFilterList;
+            list.forEach((item, i) => {
+                if (item.id === id) {
+                    list.splice(i, 1);
+                }
+            });
+
+
+            this.getPreferences().set('presetFilters', presetFilters);
+            this.getPreferences().save({patch: true});
+            this.getPreferences().trigger('update');
+
+            this.presetName = this.primary;
+            this.textFilter = '';
+            this.advanced = {};
+            this.bool = {};
+            this.boolFilterData = {};
+
+            this.removeFilters();
+
+            this.render();
+            this.updateSearch();
+            this.updateCollection();
         },
 
         afterRender: function () {
@@ -359,7 +435,6 @@ Espo.define('treo-core:views/record/search', 'class-replace!treo-core:views/reco
 
         managePresetFilters: function () {
             var presetName = this.presetName || null;
-            var data = this.getPresetData();
             var primary = this.primary;
 
             this.$el.find('ul.filter-menu a.preset span').remove();
@@ -424,6 +499,34 @@ Espo.define('treo-core:views/record/search', 'class-replace!treo-core:views/reco
             presetName = presetName || '';
 
             this.$el.find('ul.filter-menu a.preset[data-name="'+presetName+'"]').prepend('<span class="fas fa-check pull-right"></span>');
+        },
+
+        loadSearchData() {
+            const searchData = this.searchManager.get();
+            this.textFilter = searchData.textFilter;
+
+            if ('presetName' in searchData) {
+                this.presetName = searchData.presetName;
+            }
+
+            let primaryIsSet = false;
+            if ('primary' in searchData) {
+                this.primary = searchData.primary;
+                if (!this.presetName) {
+                    this.presetName = this.primary;
+                }
+                primaryIsSet = true;
+            }
+
+            if (this.presetName) {
+                this.advanced = _.extend(Espo.Utils.clone(this.getPresetData().advanced), searchData.advanced);
+                if (!primaryIsSet) {
+                    this.primary = this.getPrimaryFilterName();
+                }
+            } else {
+                this.advanced = Espo.Utils.clone(searchData.advanced);
+            }
+            this.bool = searchData.bool;
         },
 
         isLeftDropdown() {
