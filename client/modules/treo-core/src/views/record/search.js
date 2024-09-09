@@ -264,6 +264,13 @@ Espo.define('treo-core:views/record/search', 'class-replace!treo-core:views/reco
                 this.removeFilters();
                 this.textFilter = textFilter;
                 this.advanced = advanced;
+                //restore hiddenBoolFilters
+                Object.keys(this.bool).forEach(item => {
+                    if (this.hiddenBoolFilterList.includes(item)) {
+                        bool[item] = this.bool[item];
+                        boolFilterData[item] = this.boolFilterData[item];
+                    }
+                });
                 this.bool = bool;
                 this.boolFilterData = boolFilterData;
             }
@@ -304,8 +311,17 @@ Espo.define('treo-core:views/record/search', 'class-replace!treo-core:views/reco
             this.presetName = this.primary;
             this.textFilter = '';
             this.advanced = {};
-            this.bool = {};
-            this.boolFilterData = {};
+            //restore hiddenBoolFilters
+            const bool = {};
+            const boolFilterData = {};
+            Object.keys(this.bool).forEach(item => {
+                if (this.hiddenBoolFilterList.includes(item)) {
+                    bool[item] = this.bool[item];
+                    boolFilterData[item] = this.boolFilterData[item];
+                }
+            });
+            this.bool = bool;
+            this.boolFilterData = boolFilterData;
 
             this.removeFilters();
 
@@ -531,12 +547,7 @@ Espo.define('treo-core:views/record/search', 'class-replace!treo-core:views/reco
 
         isLeftDropdown() {
             return Dep.prototype.isLeftDropdown.call(this) || this.getAdvancedDefs().length;
-        },
-
-        resetFilters() {
-            this.bool = {};
-
-            Dep.prototype.resetFilters.call(this);
         }
+
     });
 });
