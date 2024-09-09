@@ -535,7 +535,7 @@ Espo.define('treo-core:views/record/search', 'class-replace!treo-core:views/reco
             }
 
             if (this.presetName) {
-                this.advanced = _.extend(Espo.Utils.clone(this.getPresetData().advanced), searchData.advanced);
+                this.advanced = _.extend(Espo.Utils.clone(this.getPresetData().advanced || {}), searchData.advanced);
                 if (!primaryIsSet) {
                     this.primary = this.getPrimaryFilterName();
                 }
