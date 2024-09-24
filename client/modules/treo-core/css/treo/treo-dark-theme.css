@@ -21231,25 +21231,40 @@ select {
 .cell.modded-field.selected-mode {
      background-color: #66afe94c;
 }
+.cell.modded-field .ai-label,
+.cell.modded-field .ai-configure,
 .cell.modded-field .state-label,
 .cell.modded-field .copy-to-manual-link {
     padding: 2px 6px;
     border-radius: 4px;
     border: 1px solid #ececec;
     cursor: pointer;
+    background-color: #fff;
 }
+.cell.modded-field .ai-label:hover,
+.cell.modded-field .ai-configure:hover,
 .cell.modded-field .state-label:hover,
 .cell.modded-field .copy-to-manual-link:hover {
     background-color: #2895ea;
     border-color: #2895ea;
     color: #fff;
 }
-.cell.modded-field.selected-mode .state-label,
+.cell.modded-field.selected-mode .ai-label.active,
+.cell.modded-field.selected-mode .state-label.active,
 .cell.modded-field.selected-mode .copy-to-manual-link {
     cursor: default;
     background-color: #2895ea;
     border-color: #2895ea;
     color: #fff;
+}
+.cell.modded-field .ai-label {
+    margin-left: 10px;
+    border-radius: 4px 0 0 4px;
+}
+.cell.modded-field .ai-configure {
+    border-radius: 0 4px 4px 0;
+    border-left: 0;
+    padding: 2px;
 }
 .cell.modded-field.selected-mode .copy-to-manual-link {
     cursor: pointer;
