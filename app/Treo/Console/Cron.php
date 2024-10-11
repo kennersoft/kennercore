@@ -90,14 +90,18 @@ class Cron extends AbstractConsole
             exec("$php index.php daemon composer $id >/dev/null 2>&1 &");
         }
 
-        // open daemon queue manager stream 0
-        if (empty(strpos($processes, "index.php daemon qm 0-$id"))) {
-            exec("$php index.php daemon qm 0-$id >/dev/null 2>&1 &");
+        $count = (int)$this->getConfig()->get('streamsNumber') ?? 2;
+        if ($count < 2) {
+            $count = 2;
+        } elseif ($count > 10) {
+            $count = 10;
         }
 
-        // open daemon queue manager stream 1
-        if (empty(strpos($processes, "index.php daemon qm 1-$id"))) {
-            exec("$php index.php daemon qm 1-$id >/dev/null 2>&1 &");
+        for ($i = 0; $i < $count; $i++) {
+            // open daemon queue manager stream $i
+            if (empty(strpos($processes, "index.php daemon qm $i-$id"))) {
+                exec("$php index.php daemon qm $i-$id >/dev/null 2>&1 &");
+            }
         }
 
         // open daemon notification

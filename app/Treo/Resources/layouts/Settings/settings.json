@@ -6,6 +6,7 @@
             [{"name": "exportDisabled"}, {"name": "siteUrl"}],
             [{"name": "followCreatedEntities"}, {"name": "globalSearchEntityList"}],
             [{"name": "aclStrictMode"}, {"name": "cronPhpVersion"}],
+            [{"name": "streamsNumber"}, false],
             [{"name": "textFilterUseContainsForVarchar"}, {"name": "aclAllowDeleteCreated"}]
         ]
     },

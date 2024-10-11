@@ -4,12 +4,14 @@
     "isStreamSide": "Ist stream panel in der seite",
     "isStreamPanelFirst": "Ist stream panel zuerst",
     "unitsOfMeasure": "Units Of Measure",
-    "cronPhpVersion": "PHP-Version, die von cron ausgeführt wird"
+    "cronPhpVersion": "PHP-Version, die von cron ausgeführt wird",
+    "streamsNumber": "Anzahl der Queue Manager-Streams"
   },
   "tooltips": {
     "isStreamSide": "Wenn aktiviert, wird das Stream-Panel auf der Seite angezeigt.",
     "isStreamPanelFirst": "Wenn aktiviert: Das Stream-Panel wird direkt nach der Übersicht angezeigt.",
-    "cronPhpVersion": "Für Cron zu verwendende PHP-Version.<br>Beispiel, <strong>php7.3</strong><br>Für Standardwert leer lassen"
+    "cronPhpVersion": "Für Cron zu verwendende PHP-Version.<br>Beispiel, <strong>php7.3</strong><br>Für Standardwert leer lassen",
+    "streamsNumber": "Wie viele Threads können vom Warteschlangenmanager verwendet werden. (Von <strong>2</strong> bis <strong>10</strong>)"
   },
   "labels": {
     "System Notifications": "System-Meldungen"

@@ -4,12 +4,14 @@
     "isStreamSide": "Is stream in side",
     "isStreamPanelFirst": "Is stream panel first",
     "unitsOfMeasure": "Units Of Measure",
-    "cronPhpVersion": "Php version which will be run by cron"
+    "cronPhpVersion": "Php version which will be run by cron",
+    "streamsNumber": "Number of Queue Manager streams"
   },
   "tooltips": {
     "isStreamSide": "If enabled: Stream panel will be shown in side.",
     "isStreamPanelFirst": "If enabled: Stream panel will be shown right after overview.",
-    "cronPhpVersion": "Php version to be used for cron.<br>Example, <strong>php7.3</strong><br>Leave empty for default value."
+    "cronPhpVersion": "Php version to be used for cron.<br>Example, <strong>php7.3</strong><br>Leave empty for default value.",
+    "streamsNumber": "How many threads can be used by the Queue Manager. (From <strong>2</strong> to <strong>10</strong>)"
   },
   "labels": {
     "Representation": "Representation",
