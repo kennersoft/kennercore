@@ -21241,6 +21241,12 @@ select {
     cursor: pointer;
     background-color: #fff;
 }
+.cell.modded-field .ai-label[disabled],
+.cell.modded-field .ai-configure[disabled],
+.cell.modded-field .state-label[disabled],
+.cell.modded-field .copy-to-manual-link[disabled] {
+    cursor: not-allowed;
+}
 .cell.modded-field .ai-label:hover,
 .cell.modded-field .ai-configure:hover,
 .cell.modded-field .state-label:hover,
