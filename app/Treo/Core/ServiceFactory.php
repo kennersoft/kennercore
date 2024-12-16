@@ -142,6 +142,10 @@ class ServiceFactory
             if ($module == 'TreoCore') {
                 $module = 'Treo';
             }
+            // prepare module name for Custom services
+            if ($module == 'Custom') {
+                $module = 'Espo\\Custom';
+            }
 
             $this->classNames[$name] = "\\$module\\Services\\$name";
         }
