@@ -180,7 +180,13 @@
     "TreoLightTheme": "Kenner Light Theme"
   },
   "scopeNames": {
-    "Stream": "Stream"
+    "Stream": "Stream",
+    "Workflow": "Workflow",
+    "WorkflowLog": "WorkflowLog"
+  },
+  "scopeNamesPlural": {
+    "Workflow": "Workflows",
+    "WorkflowLog": "Workflow Logs"
   },
   "messages": {
     "successAndReload": "Die Änderungen wurden gespeichert. Die Seite wird in {value} Sekunden neu geladen.",

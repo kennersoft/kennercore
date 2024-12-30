@@ -1,0 +1,36 @@
+[
+    {
+        "rows": [
+            [
+                {"name": "workflow"}
+            ],
+            [
+                {"name": "createdAt"}
+            ],
+            [
+                {"name": "status"}
+            ],
+            [
+                {"name": "message"}
+            ],
+            [
+                {"name": "targetEntityType"}
+            ],
+            [
+                {"name": "actionType"}
+            ],
+            [
+                {"name": "formulaIsApplied"}
+            ],
+            [
+                {"name": "appliedFormula"}
+            ],
+            [
+                {"name": "entityBeforeFormulaApply"}
+            ],
+            [
+                {"name": "entityAfterFormulaApply"}
+            ]
+        ]
+    }
+]

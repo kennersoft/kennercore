@@ -1,0 +1,14 @@
+{
+  "fields": {
+    "workflow": "Workflow",
+    "createdAt": "Erstellt am",
+    "status": "Status",
+    "message": "Message",
+    "targetEntityType": "Entitätstyp",
+    "actionType": "Art der Aktion",
+    "formulaIsApplied": "Wird die Formel angewendet",
+    "appliedFormula": "Die Formel, die angewandt wurde",
+    "entityBeforeFormulaApply": "Zielunternehmen vor Anwendung der Formel",
+    "entityAfterFormulaApply": "Zielunternehmen nach Anwendung der Formel"
+  }
+}

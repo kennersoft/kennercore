@@ -1,0 +1,8 @@
+[
+    {"name": "name"},
+    {"name": "isActive"},
+    {"name": "targetEntityType"},
+    {"name": "actionType"},
+    {"name": "conditions"},
+    {"name": "script"}
+]

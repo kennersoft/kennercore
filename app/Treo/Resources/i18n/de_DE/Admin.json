@@ -9,7 +9,9 @@
     "progressLog": "Fortschritte Log",
     "Unit": "Maßeinheit",
     "addOption": "Option hinzufügen",
-    "addMeasureUnit": "Maßeinheit hinzufügen"
+    "addMeasureUnit": "Maßeinheit hinzufügen",
+    "Workflow": "Workflow",
+    "WorkflowLog": "Workflow Log"
   },
   "fieldTypes": {
     "unit": "Maßeinheit"
@@ -17,7 +19,9 @@
   "descriptions": {
     "composer": "Das Plug-In für die Verwaltung von Abhängigkeiten, das es Ihnen erlaubt, Module aus dem externen Ablage zu installieren/aktualisieren/deinstallieren. Die Abhängigkeiten zwischen den modulen sind unterstützt.",
     "representationSettings": "Representation settings.",
-    "unit": "Einstellungen Maßeinheiten"
+    "unit": "Einstellungen Maßeinheiten",
+    "WorkflowDesc": "Workflow-Manager",
+    "WorkflowLogDesc": "Workflow Logs"
   },
   "layouts": {
     "relationships": "Unterer Paneele",

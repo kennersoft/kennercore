@@ -1,0 +1,58 @@
+{
+    "fields": {
+        "workflow": {
+            "type": "link"
+        },
+        "createdAt": {
+            "type": "datetime"
+        },
+        "status": {
+            "type": "enum",
+            "options": [
+                "error",
+                "success"
+            ]
+        },
+        "message": {
+            "type": "text"
+        },
+        "targetEntityType": {
+            "type": "varchar",
+            "maxLength": 100
+        },
+        "actionType": {
+            "type": "varchar",
+            "maxLength": 100
+        },
+        "formulaIsApplied": {
+            "type": "bool"
+        },
+        "appliedFormula": {
+            "type": "text"
+        },
+        "entityBeforeFormulaApply": {
+            "type": "jsonObject"
+        },
+        "entityAfterFormulaApply": {
+            "type": "jsonObject"
+        }
+    },
+    "links": {
+        "accounts": {
+            "type": "hasOne",
+            "entity": "Workflow",
+            "foreign": "id",
+            "relationName": "LogToWorkflow"
+        }
+    },
+    "indexes": {
+        "name": {
+            "columns": ["createdAt"]
+        }
+    },
+    "collection": {
+        "textFilterFields": ["workflow"],
+        "orderBy": "createdAt",
+        "order": "desc"
+    }
+}

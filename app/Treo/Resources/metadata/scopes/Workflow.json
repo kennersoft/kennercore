@@ -1,0 +1,9 @@
+{
+    "module": "TreoCore",
+    "entity": true,
+    "object": true,
+    "acl": true,
+    "tab": true,
+    "importable": true,
+    "customizable": true
+}
