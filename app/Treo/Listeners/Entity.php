@@ -42,6 +42,7 @@ namespace Treo\Listeners;
 
 use Espo\Hooks\Common;
 use Treo\Core\EventManager\Event;
+use Treo\Entities\Workflow as WorkflowEntity;
 
 /**
  * Class Entity
@@ -69,6 +70,8 @@ class Entity extends AbstractListener
             $this
                 ->createHook(Common\NextNumber::class)
                 ->beforeSave($event->getArgument('entity'), $event->getArgument('options'));
+
+            $this->executeWorkflowAction($event, WorkflowEntity::ACTION_TYPE_BEFORE_SAVE);
         }
     }
 
@@ -94,6 +97,8 @@ class Entity extends AbstractListener
             $this
                 ->createHook(Common\StreamNotesAcl::class)
                 ->afterSave($event->getArgument('entity'), $event->getArgument('options'));
+
+            $this->executeWorkflowAction($event, WorkflowEntity::ACTION_TYPE_AFTER_SAVE);
         }
     }
 
@@ -110,6 +115,8 @@ class Entity extends AbstractListener
             $this
                 ->createHook(Common\Notifications::class)
                 ->beforeRemove($event->getArgument('entity'), $event->getArgument('options'));
+
+            $this->executeWorkflowAction($event, WorkflowEntity::ACTION_TYPE_BEFORE_REMOVE);
         }
     }
 
@@ -129,6 +136,8 @@ class Entity extends AbstractListener
             $this
                 ->createHook(Common\Stream::class)
                 ->afterRemove($event->getArgument('entity'), $event->getArgument('options'));
+
+            $this->executeWorkflowAction($event, WorkflowEntity::ACTION_TYPE_AFTER_REMOVE);
         }
     }
 
@@ -166,6 +175,8 @@ class Entity extends AbstractListener
             if ($attachment) {
                 $this->getService("Attachment")->moveMultipleAttachment($attachment);
             }
+
+            $this->executeWorkflowAction($event, WorkflowEntity::ACTION_TYPE_BEFORE_RELATE);
         }
     }
 
@@ -186,6 +197,8 @@ class Entity extends AbstractListener
                     $event->getArgument('options'),
                     $this->getHookRelationData($event)
                 );
+
+            $this->executeWorkflowAction($event, WorkflowEntity::ACTION_TYPE_AFTER_RELATE);
         }
     }
 
@@ -303,5 +316,13 @@ class Entity extends AbstractListener
         }
 
         return false;
+    }
+
+    private function executeWorkflowAction(Event $event, string $actionType): void
+    {
+        $this->createHook(Workflow::class)->execute(
+            $actionType,
+            $event->getArgument('entity')
+        );
     }
 }

@@ -1,0 +1,12 @@
+{
+  "labels": {
+    "Create Workflow": "Create Workflow"
+  },
+  "fields": {
+    "name": "Name",
+    "isActive": "Active",
+    "targetEntityType": "Entity type",
+    "actionType": "Action type",
+    "script": "Formula"
+  }
+}

@@ -1,0 +1,50 @@
+{
+    "fields": {
+        "name": {
+            "type": "varchar",
+            "maxLength": 100,
+            "required": true
+        },
+        "isActive": {
+            "type": "bool",
+            "default": true
+        },
+        "targetEntityType": {
+            "type": "enum",
+            "required": true,
+            "view": "views/fields/entity-type"
+        },
+        "actionType": {
+            "type": "enum",
+            "required": true,
+            "options": [
+                "beforeSave",
+                "afterSave",
+                "beforeRemove",
+                "afterRemove",
+                "afterRelate",
+                "afterUnrelate"
+            ]
+        },
+        "conditions": {
+            "type": "jsonObject",
+            "required": false,
+            "view": "treo-core:views/workflow/fields/logic"
+        },
+        "script": {
+            "type": "text",
+            "view": "treo-core:views/workflow/fields/formula",
+            "required": true
+        }
+    },
+    "indexes": {
+        "name": {
+            "columns": ["name"]
+        }
+    },
+    "collection": {
+        "textFilterFields": ["name"],
+        "orderBy": "name",
+        "order": "desc"
+    }
+}

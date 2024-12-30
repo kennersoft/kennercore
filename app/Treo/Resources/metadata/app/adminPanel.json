@@ -148,6 +148,22 @@
     ],
     "order": 30
   },
+  "workflow":{
+    "label": "Workflow",
+    "itemList": [
+      {
+        "url":"#Workflow",
+        "label":"Workflow",
+        "description":"WorkflowDesc"
+      },
+      {
+        "url":"#WorkflowLog",
+        "label":"Workflow logs",
+        "description":"WorkflowLogDesc"
+      }
+    ],
+    "order": 30
+  },
   "portal": {
     "label": "Portal",
     "itemList": [

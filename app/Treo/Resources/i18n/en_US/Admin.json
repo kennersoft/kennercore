@@ -6,7 +6,9 @@
     "Unit": "Measurement Unit",
     "addOption": "Add option",
     "addMeasureUnit": "Add measurement unit",
-    "progressLog": "Progress Log"
+    "progressLog": "Progress Log",
+    "Workflow": "Workflow",
+    "WorkflowLog": "Workflow log"
   },
   "fieldTypes": {
     "unit": "Unit"
@@ -14,7 +16,9 @@
   "descriptions": {
     "composer": "Installation / uninstallation / updating of modules, which is dependency consistent",
     "representationSettings": "Representation settings",
-    "unit": "Units of measurement settings"
+    "unit": "Units of measurement settings",
+    "WorkflowDesc": "Workflow manager",
+    "WorkflowLogDesc": "Workflow logs"
   },
   "layouts": {
     "relationships": "Bottom Panels"

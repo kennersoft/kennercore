@@ -1,0 +1,31 @@
+{
+    "controller": "controllers/record",
+    "iconClass": "fas fa-arrow-circle-up",
+    "recordViews": {
+        "edit": "treo-core:views/workflow/record/edit"
+    },
+    "dynamicLogic": {
+        "fields": {
+            "conditions": {
+                "visible": {
+                    "conditionGroup": [
+                        {
+                            "type": "isNotEmpty",
+                            "attribute": "targetEntityType"
+                        }
+                    ]
+                }
+            },
+            "script": {
+                "visible": {
+                    "conditionGroup": [
+                        {
+                            "type": "isNotEmpty",
+                            "attribute": "targetEntityType"
+                        }
+                    ]
+                }
+            }
+        }
+    }
+}

@@ -1,11 +1,15 @@
 {
   "scopeNames": {
     "QueueItem": "Queue Item",
-    "TreoStore": "Store"
+    "TreoStore": "Store",
+    "Workflow": "Workflow",
+    "WorkflowLog": "Workflow"
   },
   "scopeNamesPlural": {
     "QueueItem": "Queue Manager",
-    "TreoStore": "Store"
+    "TreoStore": "Store",
+    "Workflow": "Workflows",
+    "WorkflowLog": "Workflow Logs"
   },
   "options": {
     "language": {
