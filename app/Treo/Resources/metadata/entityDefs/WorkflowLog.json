@@ -38,11 +38,9 @@
         }
     },
     "links": {
-        "accounts": {
-            "type": "hasOne",
-            "entity": "Workflow",
-            "foreign": "id",
-            "relationName": "LogToWorkflow"
+        "workflow": {
+            "type": "belongsTo",
+            "entity": "Workflow"
         }
     },
     "indexes": {
