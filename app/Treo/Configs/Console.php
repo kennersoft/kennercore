@@ -56,4 +56,5 @@ return [
     "notifications --refresh"      => Console\Notification::class,
     "kill daemons"                 => Console\KillDaemons::class,
     "daemon <name> <id>"           => Console\Daemon::class,
+    "create admin"                 => Console\CreateAdmin::class,
 ];
