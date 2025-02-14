@@ -15182,7 +15182,7 @@ table.table > thead th > a {
     color: #999
 }
 
-table.table > thead th {
+table.table > thead th:not(:first-child) {
     color: #999;
     overflow: hidden;
     text-overflow: ellipsis;
