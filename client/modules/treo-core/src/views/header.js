@@ -78,6 +78,39 @@ Espo.define('treo-core:views/header', 'class-replace!treo-core:views/header', fu
             }
         },
 
+        setupFinal() {
+            Dep.prototype.setupFinal.call(this);
+
+            this.bindFixedHeaderOnScroll();
+        },
+
+        bindFixedHeaderOnScroll() {
+            let $window = $(window);
+            this.listenToOnce(this, 'remove', () => {
+                $window.off('scroll.fixed-header')
+            });
+            const updateHeaderWidth = () => {
+                let scrollTop = $window.scrollTop();
+                let header = this.$el.find('.header-breadcrumbs');
+                let navBarRight = $('#header .navbar-right');
+                let width = $('#header ul.navbar-right > li').get().reduce((prev, curr) => {
+                    return prev - $(curr).outerWidth()
+                }, navBarRight.outerWidth() - 30);
+                if (scrollTop > this.$el.find('.page-header').outerHeight() && !$('#header .navbar .menu').hasClass('open-menu')) {
+                    header.addClass('fixed-header-breadcrumbs')
+                        .css('width', width + 'px');
+                } else {
+                    header.removeClass('fixed-header-breadcrumbs')
+                        .css('width', 'auto');
+                }
+            };
+            this.listenTo(this, 'after:render', () => {
+                updateHeaderWidth();
+                $window.off('scroll.fixed-header');
+                $window.on('scroll.fixed-header', () => updateHeaderWidth());
+            });
+        },
+
         createOverviewFilters() {
             this.updatedOverviewFilters = this.filterOverviewFilters();
 
