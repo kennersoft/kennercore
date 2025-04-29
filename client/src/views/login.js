@@ -59,8 +59,13 @@ Espo.define('views/login', 'view', function (Dep) {
         },
 
         data: function () {
+            const isDemo = this.getConfig().get('demoMode');
+
             return {
-                logoSrc: this.getLogoSrc()
+                logoSrc: this.getLogoSrc(),
+                isDemo: isDemo,
+                login: isDemo ? this.getConfig().get('demoLogin') : '',
+                password: isDemo ? this.getConfig().get('demoPassword') : '',
             };
         },
 

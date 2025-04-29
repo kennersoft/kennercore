@@ -147,6 +147,7 @@
         "Options": "Options",
         "Username": "Username",
         "Password": "Password",
+        "demoModeText": "Pim works in demo mode, use the following data to log in",
         "Login": "Login",
         "Log Out": "Log Out",
         "Preferences": "Preferences",

@@ -7,15 +7,23 @@
                 </div>
             </div>
             <div class="panel-body">
+                {{#if isDemo}}
+                <div style="background-color: rgba(255,203,0,0.37); padding: 5px">
+                    <p><span style="font-weight: bold">{{translate 'demoModeText'}}</span></p>
+                    <p>{{translate 'Username'}}: <span style="font-weight: bold">{{login}}</span></p>
+                    <p>{{translate 'Password'}}: <span style="font-weight: bold">{{password}}</span></p>
+                </div>
+                <hr>
+                {{/if}}
                 <div>
                     <form id="login-form" onsubmit="return false;">
                         <div class="form-group">
                             <label for="field-username">{{translate 'Username'}}</label>
-                            <input type="text" name="username" id="field-userName" class="form-control" autocapitalize="off" autocorrect="off" tabindex="1">
+                            <input type="text" name="username" id="field-userName" class="form-control" autocapitalize="off" autocorrect="off" tabindex="1" value="{{login}}">
                         </div>
                         <div class="form-group">
                             <label for="login">{{translate 'Password'}}</label>
-                            <input type="password" name="password" id="field-password" class="form-control" tabindex="2">
+                            <input type="password" name="password" id="field-password" class="form-control" tabindex="2" value="{{password}}">
                         </div>
                         <div class="form-group">
                             <label for="language">{{translate 'language' category='fields' scope='Settings'}}</label>
