@@ -159,7 +159,7 @@ Espo.define('treo-core:views/record/search', 'class-replace!treo-core:views/reco
                     let data = {};
                     item.value.forEach(elem => {
                         if (elem in this.boolFilterData) {
-                            data[elem] = this.boolFilterData[elem];
+                            data[elem] = Espo.Utils.cloneDeep(this.boolFilterData[elem]);
                         }
                     });
                     _.extend(item.data, data);
@@ -175,7 +175,7 @@ Espo.define('treo-core:views/record/search', 'class-replace!treo-core:views/reco
             const boolData = {};
             for (let item in this.bool) {
                 if (item in this.boolFilterData) {
-                    boolData[item] = this.boolFilterData[item];
+                    boolData[item] = Espo.Utils.cloneDeep(this.boolFilterData[item]);
                 }
             }
             const searchData = this.searchManager.get();
@@ -267,12 +267,12 @@ Espo.define('treo-core:views/record/search', 'class-replace!treo-core:views/reco
                 //restore hiddenBoolFilters
                 Object.keys(this.bool).forEach(item => {
                     if (this.hiddenBoolFilterList.includes(item)) {
-                        bool[item] = this.bool[item];
-                        boolFilterData[item] = this.boolFilterData[item];
+                        bool[item] = Espo.Utils.cloneDeep(this.bool[item]);
+                        boolFilterData[item] = Espo.Utils.cloneDeep(this.boolFilterData[item]);
                     }
                 });
-                this.bool = bool;
-                this.boolFilterData = boolFilterData;
+                this.bool = Espo.Utils.cloneDeep(bool);
+                this.boolFilterData = Espo.Utils.cloneDeep(boolFilterData);
             }
 
             this.updateSearch();
@@ -316,12 +316,12 @@ Espo.define('treo-core:views/record/search', 'class-replace!treo-core:views/reco
             const boolFilterData = {};
             Object.keys(this.bool).forEach(item => {
                 if (this.hiddenBoolFilterList.includes(item)) {
-                    bool[item] = this.bool[item];
-                    boolFilterData[item] = this.boolFilterData[item];
+                    bool[item] = Espo.Utils.cloneDeep(this.bool[item]);
+                    boolFilterData[item] = Espo.Utils.cloneDeep(this.boolFilterData[item]);
                 }
             });
-            this.bool = bool;
-            this.boolFilterData = boolFilterData;
+            this.bool = Espo.Utils.cloneDeep(bool);
+            this.boolFilterData = Espo.Utils.cloneDeep(boolFilterData);
 
             this.removeFilters();
 
