@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Treo\Services;
 
-use Espo\Core\Templates\Services\Base;
+use Espo\Core\Services\Base;
 use Treo\Entities\Workflow as WorkflowEntity;
 use Treo\Entities\WorkflowLog as WorkflowLogEntity;
 use DateTime;
