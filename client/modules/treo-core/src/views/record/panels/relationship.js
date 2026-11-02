@@ -145,14 +145,16 @@ Espo.define('treo-core:views/record/panels/relationship', ['class-replace!treo-c
                 confirmText: this.translate('Remove')
             }, () => {
                 let model = this.collection.get(id);
-                this.notify('Removing...');
-                model.destroy({
-                    success: () => {
-                        this.notify('Removed', 'success');
-                        this.collection.fetch();
-                        this.model.trigger('after:unrelate', this.link);
-                    },
-                });
+                if (model) {
+                    this.notify('Removing...');
+                    model.destroy({
+                        success: () => {
+                            this.notify('Removed', 'success');
+                            this.collection.fetch();
+                            this.model.trigger('after:unrelate', this.link);
+                        },
+                    });
+                }
             });
         },
 

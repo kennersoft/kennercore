@@ -20779,8 +20779,14 @@ td[data-name="draggableIcon"] {
 
 .queue-panel-container > .panel > .panel-body .list > table td {
     white-space: normal;
-    text-overflow: initial;
-    overflow: visible;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+.queue-panel-container > .panel > .panel-body .list > table td span {
+    max-width: 100%;
+    white-space: normal;
+    text-overflow: ellipsis;
+    overflow: hidden;
 }
 
 .queue-panel-container .queue-manager-action {
